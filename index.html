@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-acc="on" data-voice="lit">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Raíz · Field Journal · Ciudad de México</title>
+<meta name="description" content="Una versión de la Ciudad de México contada por quienes la viven. Experiencias de un día en grupos pequeños, narradas por sus guías, cocineros y vecinos." />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="canonical" href="https://alaraiz.mx/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Raíz" />
+<meta property="og:url" content="https://alaraiz.mx/" />
+<meta property="og:title" content="Raíz · La ciudad debajo de la ciudad" />
+<meta property="og:description" content="Experiencias de un día en la Ciudad de México, contadas por quienes la viven. Grupos pequeños, guías locales, valor que se queda en la comunidad." />
+<meta property="og:image" content="https://alaraiz.mx/assets/roots-hero.jpg" />
+<meta property="og:locale" content="es_MX" />
+<meta property="og:locale:alternate" content="en_US" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Raíz · La ciudad debajo de la ciudad" />
+<meta name="twitter:description" content="Experiencias de un día en la Ciudad de México, contadas por quienes la viven." />
+<meta name="twitter:image" content="https://alaraiz.mx/assets/roots-hero.jpg" />
+<meta name="theme-color" content="#14110d" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="raiz-v3.css" />
+</head>
+<body>
+
+<template id="__bundler_thumbnail" data-bg-color="#14110d">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#14110d" />
+    <text x="600" y="430" text-anchor="middle" font-family="'Space Grotesk', system-ui, sans-serif" font-size="180" font-weight="600" letter-spacing="-6" fill="#ECE7DD">Ra&#237;z</text>
+    <circle cx="812" cy="318" r="20" fill="#c9824f" />
+    <text x="600" y="540" text-anchor="middle" font-family="'Space Grotesk', monospace" font-size="28" letter-spacing="14" fill="#857c6f">FIELD JOURNAL</text>
+  </svg>
+</template>
+
+<!-- ============ NAV / MASTHEAD ============ -->
+<header class="nav" id="nav">
+  <div class="nav-top">
+    <span class="nav-issue"><b>Field Journal</b> &nbsp;·&nbsp; Núm. 01</span>
+    <div style="display:flex;align-items:center;gap:1rem">
+      <span class="nav-issue right"><span class="lng-es">Ciudad de México &nbsp;·&nbsp; Lanzamiento Jun 2026</span><span class="lng-en">Mexico City &nbsp;·&nbsp; Launch Jun 2026</span></span>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-lang-set="es" aria-pressed="true">ES</button>
+        <button type="button" data-lang-set="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </div>
+  <div class="nav-main">
+    <a href="#top" class="brand">Raíz<span class="dot"></span></a>
+    <nav class="links">
+      <a href="#recreo"><span class="lng-es">Experiencias</span><span class="lng-en">Experiences</span></a>
+      <a href="#especialistas"><span class="lng-es">Especialistas</span><span class="lng-en">Specialists</span></a>
+      <a href="detente-no-02.html" target="_blank" rel="noopener">Détente</a>
+      <a href="#descubre"><span class="lng-es">Más</span><span class="lng-en">More</span></a>
+      <a href="#rsvp" class="btn"><span class="lng-es">Reserva tu lugar</span><span class="lng-en">Save your spot</span></a>
+      <a href="#rsvp" class="nav-cta btn"><span class="lng-es">Reserva</span><span class="lng-en">Book</span></a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO / COVER (full-bleed, Voortus-style) ============ -->
+<section class="hero" id="top" data-screen-label="Hero">
+  <div class="hero-bg">
+    <img src="assets/roots-hero.jpg" alt="Raíces antiguas entrelazadas bajo la luz del bosque" />
+    <div class="hero-scrim"></div>
+  </div>
+  <div class="hero-inner wrap">
+    <div class="hero-top reveal in">
+      <span class="hero-eyebrow"><span class="rule"></span><span class="lng-es">Ciudad de México · Experiencias de un día</span><span class="lng-en">Mexico City · One-day experiences</span></span>
+      <span class="hero-coords">19°26′N 99°08′W</span>
+    </div>
+    <h1 class="reveal in"><span class="lng-es">La ciudad<br /><em>debajo</em> de la ciudad.</span><span class="lng-en">The city<br /><em>beneath</em> the city.</span></h1>
+    <div class="hero-foot">
+      <p class="hero-dek reveal in d1">
+        <span class="lng-es"><span class="v-lit">Existe una versión de la Ciudad de México que no aparece en ninguna plataforma. Raíz te lleva ahí —con quienes la habitan, no quienes la venden.</span><span class="v-plain">Recreo son experiencias de un día en la Ciudad de México, en grupos pequeños, guiadas por la gente que vive y trabaja en cada lugar.</span></span><span class="lng-en"><span class="v-lit">There's a version of Mexico City that lives on no platform. Raíz takes you there —with the people who inhabit it, not the ones who sell it.</span><span class="v-plain">Recreo is one-day experiences in Mexico City, in small groups, led by the people who live and work in each place.</span></span>
+      </p>
+      <div class="hero-actions reveal in d2">
+        <a href="#recreo" class="btn btn-solid"><span class="lng-es">Ver las experiencias</span><span class="lng-en">See the experiences</span></a>
+        <a href="#manifiesto" class="btn btn-ghost"><span class="lng-es">Lee el manifiesto</span><span class="lng-en">Read the manifesto</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-ticker reveal in d2">
+    <div><span class="tk"><span class="lng-es">Cómo viajamos</span><span class="lng-en">How we travel</span></span><span class="tv"><span class="lng-es">En grupos pequeños</span><span class="lng-en">In small groups</span></span></div>
+    <div><span class="tk"><span class="lng-es">Quién narra</span><span class="lng-en">Who tells it</span></span><span class="tv"><span class="lng-es">La gente de la ciudad</span><span class="lng-en">The city's own people</span></span></div>
+    <div><span class="tk"><span class="lng-es">A dónde va el valor</span><span class="lng-en">Where the value goes</span></span><span class="tv"><span class="lng-es">A la comunidad</span><span class="lng-en">To the community</span></span></div>
+    <div><span class="tk"><span class="lng-es">Qué te llevas</span><span class="lng-en">What you leave with</span></span><span class="tv"><span class="lng-es">Una relación, no una foto</span><span class="lng-en">A relationship, not a photo</span></span></div>
+  </div>
+</section>
+
+<!-- ============ RECREO / PRODUCT GALLERY (horizontal) ============ -->
+<section id="recreo" class="recreo pad rule-top" data-screen-label="Recreo">
+  <div class="wrap">
+    <div class="rec-head reveal">
+      <div class="rec-head-l">
+        <span class="kicker"><span class="lng-es">Recreo · Experiencias de un día</span><span class="lng-en">Recreo · One-day experiences</span></span>
+        <h2><span class="lng-es">Tres <em>experiencias</em>,<br />cada una un mundo.</span><span class="lng-en">Three <em>experiences</em>,<br />each its own world.</span></h2>
+      </div>
+      <div class="rec-head-r">
+        <p class="lede"><span class="lng-es">Cada línea es un laboratorio con su propio anfitrión y su propio arco —contexto, proceso, catarsis. Desliza para recorrerlas.</span><span class="lng-en">Each line is a lab with its own host and its own arc —context, process, catharsis. Swipe to move through them.</span></p>
+        <div class="rec-nav">
+          <button class="rec-arrow" data-dir="-1" aria-label="Anterior">←</button>
+          <button class="rec-arrow" data-dir="1" aria-label="Siguiente">→</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rec-rail" id="recRail">
+    <!-- CARD I -->
+    <article class="rec-card reveal" data-c="moss" data-screen-label="Recreo · Cocinando Resistencia">
+      <div class="rec-media">
+        <img src="assets/exp-mesa.jpg" alt="Mesa con jícaras, molcajetes y masa — cocina de raíz" />
+        <span class="rec-roman">II</span>
+        <span class="rec-col"><span class="pill"></span> Poner la Mesa · Colección II</span>
+      </div>
+      <div class="rec-body">
+        <span class="rec-tags">Craft · Comunidad · Resistencia</span>
+        <h3 class="rec-name">Cocinando Resistencia</h3>
+        <p class="rec-product"><span class="lng-es">La mesa como territorio político. Una ruta a pie por panadería cooperativa, kombucha de barrio, pulque centenario y cocina queer de resistencia.</span><span class="lng-en">The table as political territory. A walking route through a cooperative bakery, neighborhood kombucha, century-old pulque and queer kitchens of resistance.</span></p>
+        <p class="rec-pull"><span class="lng-es">«Quién cocina, quién resiste y quién se queda con el valor.»</span><span class="lng-en">“Who cooks, who resists, and who keeps the value.”</span></p>
+        <div class="rec-spec">
+          <div class="rs"><span class="rsk"><span class="lng-es">Duración</span><span class="lng-en">Length</span></span><span class="rsv"><span class="lng-es">5 horas · ruta a pie</span><span class="lng-en">5 hours · on foot</span></span></div>
+          <div class="rs"><span class="rsk"><span class="lng-es">Ritmo</span><span class="lng-en">Pace</span></span><span class="rsv meter"><span class="dots"><i class="on"></i><i class="on"></i><i></i></span><span class="ml"><span class="lng-es">Con pausas</span><span class="lng-en">With breaks</span></span></span></div>
+          <div class="rs"><span class="rsk"><span class="lng-es">Zona</span><span class="lng-en">Area</span></span><span class="rsv"><span class="lng-es">San Rafael → Centro</span><span class="lng-en">San Rafael → Centro</span></span></div>
+          <div class="rs"><span class="rsk"><span class="lng-es">Idioma</span><span class="lng-en">Language</span></span><span class="rsv">ES / EN</span></div>
+        </div>
+        <div class="rec-acc"><span class="acc-tags"><span class="yes"><span class="lng-es">Mayormente plano</span><span class="lng-en">Mostly flat</span></span><span class="note"><span class="lng-es">Incluye alcohol (opcional)</span><span class="lng-en">Alcohol (optional)</span></span><span class="note"><span class="lng-es">Avísanos de alergias</span><span class="lng-en">Tell us about allergies</span></span></span></div>
+        <div class="rec-foot">
+          <div class="rec-lead"><span class="lead-avatar">AR</span><span class="lead-meta"><span class="lbl"><span class="lng-es">Anfitriona</span><span class="lng-en">Host</span></span><span class="nm">Ana Cristina Rubio</span></span></div>
+          <a href="#rsvp" class="rec-cta"><span class="lng-es">Solicitar →</span><span class="lng-en">Apply →</span></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- CARD II -->
+    <article class="rec-card reveal d1" data-c="slate" data-screen-label="Recreo · Aguas">
+      <div class="rec-media">
+        <img src="assets/exp-aguas.jpg" alt="Tuberías de agua y vegetación — la infraestructura hídrica de la ciudad" />
+        <span class="rec-roman">III</span>
+        <span class="rec-col"><span class="pill"></span> Bajotierra · Colección III</span>
+      </div>
+      <div class="rec-body">
+        <span class="rec-tags">Agua · Historia · Arte</span>
+        <h3 class="rec-name">¡Aguas!</h3>
+        <p class="rec-product"><span class="lng-es">La ciudad que se quedó sin su lago. Del antiguo Texcoco a la crisis del agua, entre los murales de Diego Rivera en el Cárcamo de Dolores y un picnic en Chapultepec.</span><span class="lng-en">The city that lost its lake. From ancient Texcoco to the water crisis, between Diego Rivera's murals at the Cárcamo de Dolores and a picnic in Chapultepec.</span></p>
+        <p class="rec-pull"><span class="lng-es">«Una ciudad que pasó de manto acuífero a traer su agua desde lejos —¿a qué precio?»</span><span class="lng-en">“A city that went from aquifer to hauling its water from afar —at what price?”</span></p>
+        <div class="rec-spec">
+          <div class="rs"><span class="rsk"><span class="lng-es">Duración</span><span class="lng-en">Length</span></span><span class="rsv"><span class="lng-es">5 horas · con picnic</span><span class="lng-en">5 hours · with picnic</span></span></div>
+          <div class="rs"><span class="rsk"><span class="lng-es">Ritmo</span><span class="lng-en">Pace</span></span><span class="rsv meter"><span class="dots"><i class="on"></i><i></i><i></i></span><span class="ml"><span class="lng-es">Tranquilo</span><span class="lng-en">Easy</span></span></span></div>
+          <div class="rs"><span class="rsk"><span class="lng-es">Lugar</span><span class="lng-en">Place</span></span><span class="rsv"><span class="lng-es">Chapultepec</span><span class="lng-en">Chapultepec</span></span></div>
+          <div class="rs"><span class="rsk"><span class="lng-es">Idioma</span><span class="lng-en">Language</span></span><span class="rsv">ES / EN</span></div>
+        </div>
+        <div class="rec-acc"><span class="acc-tags"><span class="yes"><span class="lng-es">Ritmo lento</span><span class="lng-en">Slow pace</span></span><span class="yes"><span class="lng-es">Picnic incluido</span><span class="lng-en">Picnic included</span></span><span class="note"><span class="lng-es">Caminata en bosque</span><span class="lng-en">Forest walking</span></span></span></div>
+        <div class="rec-foot">
+          <div class="rec-lead"><span class="lead-avatar">SM</span><span class="lead-meta"><span class="lbl"><span class="lng-es">Anfitrión</span><span class="lng-en">Host</span></span><span class="nm">Sergio Mancilla Cuevas</span></span></div>
+          <a href="#rsvp" class="rec-cta"><span class="lng-es">Solicitar →</span><span class="lng-en">Apply →</span></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- CARD III · Coming soon (last) -->
+    <article class="rec-card rec-soon reveal d2" data-c="clay" data-screen-label="Recreo · Próximamente">
+      <div class="rec-media rec-media-soon">
+        <span class="rec-roman">IV</span>
+        <span class="soon-badge"><span class="lng-es">Próximamente</span><span class="lng-en">Coming soon</span></span>
+        <span class="rec-col"><span class="pill"></span> <span class="lng-es">Nueva colección · 2026</span><span class="lng-en">New collection · 2026</span></span>
+      </div>
+      <div class="rec-body">
+        <span class="rec-tags"><span class="lng-es">En el laboratorio</span><span class="lng-en">In the lab</span></span>
+        <h3 class="rec-name"><span class="lng-es">Muy pronto</span><span class="lng-en">Coming soon</span></h3>
+        <p class="rec-product"><span class="lng-es">Estamos destilando una nueva experiencia. Déjanos tu correo y serás de los primeros en conocerla cuando abra.</span><span class="lng-en">We're distilling a new experience. Leave us your email and be among the first to know when it opens.</span></p>
+        <div class="rec-foot rec-foot-soon">
+          <a href="#rsvp" class="rec-cta"><span class="lng-es">Avísame →</span><span class="lng-en">Notify me →</span></a>
+        </div>
+      </div>
+    </article>
+  
+  </div>
+</section>
+
+
+<!-- ============ ESPECIALISTAS DE LÍNEA ============ -->
+<section id="especialistas" class="pad rule-top" data-screen-label="Especialistas">
+  <div class="wrap">
+    <div class="masthead reveal">
+      <div class="mh-l">
+        <span class="kicker"><span class="lng-es">Quién te recibe</span><span class="lng-en">Who receives you</span></span>
+        <h2><span class="lng-es">Especialistas que <em>viven</em> lo que narran.</span><span class="lng-en">Specialists who <em>live</em> what they tell.</span></h2>
+      </div>
+      <span class="folio"><span class="lng-es">Anfitriones de línea</span><span class="lng-en">Line hosts</span></span>
+    </div>
+    <p class="lede reveal d1" style="max-width:62ch;margin-bottom:clamp(34px,5vh,52px)"><span class="lng-es">Cada experiencia la lleva quien la conoce desde adentro: su oficio es su credencial, y la ciudad que te muestran es, antes que nada, la suya.</span><span class="lng-en">Each experience is led by someone who knows it from the inside: their craft is their credential, and the city they show you is, above all, their own.</span></p>
+    <div class="leads-grid">
+      <article class="lead-card reveal" data-c="moss">
+        <div class="frame portrait"><img src="assets/team-cristina.jpg" alt="Ana Cristina Rubio" /></div>
+        <div class="lc-body">
+          <div class="lc-collection"><span class="pill" style="width:8px;height:8px;border-radius:50%;background:var(--moss);display:inline-block"></span> Poner la Mesa · <span class="lng-es">Colección II</span><span class="lng-en">Collection II</span></div>
+          <h3 class="lc-name">Ana Cristina Rubio</h3>
+          <div class="lc-role"><span class="lng-es">Gastrónoma · Investigadora</span><span class="lng-en">Gastronome · Researcher</span></div>
+          <p class="lc-bio"><span class="lng-es">Investiga la mesa como territorio político: panaderías cooperativas, fermentos de barrio, pulque centenario y cocina que también es resistencia. Conoce a cada productor por su nombre y te los presenta como lo que son: el principio de todo.</span><span class="lng-en">She studies the table as political territory: cooperative bakeries, neighborhood ferments, century-old pulque and kitchens that are also resistance. She knows each producer by name and introduces them as what they are: the beginning of everything.</span></p>
+          <div class="lc-reclaims"><div class="rk"><span class="lng-es">Lo que reivindica</span><span class="lng-en">What she reclaims</span></div><div class="rv"><span class="lng-es">«Comer es un acto político y comunitario.»</span><span class="lng-en">“Eating is a political, communal act.”</span></div></div>
+        </div>
+      </article>
+
+      <article class="lead-card reveal d1" data-c="slate">
+        <div class="frame portrait"><img src="assets/team-david-alt.jpg" alt="Sergio Mancilla Cuevas" /></div>
+        <div class="lc-body">
+          <div class="lc-collection"><span class="pill" style="width:8px;height:8px;border-radius:50%;background:var(--slate);display:inline-block"></span> Bajotierra · <span class="lng-es">Colección III</span><span class="lng-en">Collection III</span></div>
+          <h3 class="lc-name">Sergio Mancilla Cuevas</h3>
+          <div class="lc-role"><span class="lng-es">Productor · Fixer · Consultor DDHH</span><span class="lng-en">Producer · Fixer · Human-rights consultant</span></div>
+          <p class="lc-bio"><span class="lng-es">Ha sido los ojos de corresponsales y documentalistas en la ciudad. Narra cómo la CDMX pasó de gran manto acuífero a megaurbe que trae su agua de lejos —entre la historia, los murales de Diego Rivera y la crisis que se paga en las periferias.</span><span class="lng-en">He has been the eyes of correspondents and documentarians in the city. He tells how Mexico City went from a great aquifer to a megacity that hauls its water from afar —between history, Diego Rivera's murals, and the crisis the peripheries pay for.</span></p>
+          <div class="lc-reclaims"><div class="rk"><span class="lng-es">Lo que reivindica</span><span class="lng-en">What he reclaims</span></div><div class="rv"><span class="lng-es">«Entender el agua es entender la ciudad.»</span><span class="lng-en">“To understand the water is to understand the city.”</span></div></div>
+        </div>
+      </article>
+
+      <article class="lead-card lead-soon reveal d2" data-c="clay">
+        <div class="frame portrait portrait-soon"><span class="soon-badge"><span class="lng-es">Próximamente</span><span class="lng-en">Coming soon</span></span></div>
+        <div class="lc-body">
+          <div class="lc-collection"><span class="pill" style="width:8px;height:8px;border-radius:50%;background:var(--clay);display:inline-block"></span> <span class="lng-es">Nueva colección · 2026</span><span class="lng-en">New collection · 2026</span></div>
+          <h3 class="lc-name"><span class="lng-es">Anfitrión por anunciar</span><span class="lng-en">Host to be announced</span></h3>
+          <div class="lc-role"><span class="lng-es">Una nueva línea en preparación</span><span class="lng-en">A new line in the making</span></div>
+          <p class="lc-bio"><span class="lng-es">Estamos sumando a la persona indicada para llevar nuestra próxima colección. Como siempre: alguien que vive lo que narra. Pronto la conocerás aquí.</span><span class="lng-en">We're bringing in the right person to lead our next collection. As always: someone who lives what they tell. You'll meet them here soon.</span></p>
+          <div class="lc-reclaims"><div class="rk"><span class="lng-es">Muy pronto</span><span class="lng-en">Coming soon</span></div><div class="rv"><span class="lng-es">«La ciudad tiene más de una historia por contar.»</span><span class="lng-en">“The city has more than one story left to tell.”</span></div></div>
+        </div>
+      </article>
+    
+    </div>
+  </div>
+</section>
+<!-- ============ RSVP ============ -->
+<section id="rsvp" class="pad rule-top" data-screen-label="RSVP">
+  <div class="wrap">
+    <div class="rsvp-grid">
+      <div class="rsvp-left reveal">
+        <span class="kicker"><span class="lng-es">El lanzamiento público</span><span class="lng-en">The public launch</span></span>
+        <h2><span class="lng-es">Tres líneas.<br />Un <em>lanzamiento</em>.</span><span class="lng-en">Three lines.<br />One <em>launch</em>.</span></h2>
+        <p class="lede"><span class="lng-es">Después de seis meses de incubación destilando la experiencia de más de una década viajando y acompañando viajeros de Fernanda y Jerónimo, y cuatro intensas semanas de laboratorio con el equipo, las tres experiencias se abren al público por primera vez. Solicita tu lugar; te diremos honestamente si es para ti.</span><span class="lng-en">After six months of incubation distilling Fernanda and Jerónimo's more than a decade of traveling and accompanying travelers, and four intense weeks of lab with the team, the three experiences open to the public for the first time. Request your spot; we'll honestly tell you if it's for you.</span></p>
+        <div class="launch-card">
+          <div class="launch-row"><span class="lk"><span class="lng-es">Fecha</span><span class="lng-en">Date</span></span><span class="lv">29 Jun – 4 Jul<small><span class="lng-es">Semana de lanzamiento · 2026</span><span class="lng-en">Launch week · 2026</span></small></span></div>
+          <div class="launch-row"><span class="lk"><span class="lng-es">Lugar</span><span class="lng-en">Place</span></span><span class="lv"><span class="lng-es">Ciudad de México</span><span class="lng-en">Mexico City</span><small>San Rafael · Chapultepec</small></span></div>
+          <div class="launch-row"><span class="lk"><span class="lng-es">Cupos</span><span class="lng-en">Spots</span></span><span class="lv"><span class="lng-es">Limitados</span><span class="lng-en">Limited</span><small><span class="lng-es">Grupos pequeños · precio público real</span><span class="lng-en">Small groups · real public price</span></small></span></div>
+        </div>
+      </div>
+
+      <div class="form-card reveal d1">
+        <form id="rsvpForm" novalidate>
+          <h3><span class="lng-es">Solicita tu lugar</span><span class="lng-en">Request your spot</span></h3>
+          <p class="fsub"><span class="lng-es">Una solicitud, no una compra. Te respondemos personalmente.</span><span class="lng-en">A request, not a purchase. We reply personally.</span></p>
+
+          <div class="field row2">
+            <div><label for="nombre"><span class="lng-es">Nombre</span><span class="lng-en">Name</span></label><input id="nombre" name="nombre" type="text" data-ph-es="Tu nombre" data-ph-en="Your name" placeholder="Tu nombre" autocomplete="name" /></div>
+            <div><label for="email"><span class="lng-es">Correo</span><span class="lng-en">Email</span></label><input id="email" name="email" type="email" data-ph-es="tú@correo.com" data-ph-en="you@email.com" placeholder="tú@correo.com" autocomplete="email" /></div>
+          </div>
+
+          <div class="field">
+            <label><span class="lng-es">¿Qué experiencia te llama?</span><span class="lng-en">Which experience calls you?</span></label>
+            <div class="chips" id="chips">
+              <span class="chip" data-v="Próximamente" role="button" tabindex="0" aria-pressed="false"><span class="lng-es">Avísame de la nueva</span><span class="lng-en">Notify me · new line</span></span>
+              <span class="chip" data-v="Cocinando Resistencia" role="button" tabindex="0" aria-pressed="false">Cocinando Resistencia</span>
+              <span class="chip" data-v="¡Aguas!" role="button" tabindex="0" aria-pressed="false">¡Aguas!</span>
+              <span class="chip" data-v="Sorpréndeme" role="button" tabindex="0" aria-pressed="false"><span class="lng-es">Sorpréndeme</span><span class="lng-en">Surprise me</span></span>
+            </div>
+          </div>
+
+          <div class="field row2">
+            <div><label for="personas"><span class="lng-es">Personas</span><span class="lng-en">People</span></label>
+              <select id="personas" name="personas">
+                <option value="1"><span class="lng-es">1 · solo / a</span></option>
+                <option value="2">2 · <span class="lng-es">pareja</span></option>
+                <option value="3-4">3–4</option>
+                <option value="5+">5+</option>
+              </select>
+            </div>
+            <div><label for="acceso"><span class="lng-es">¿Algo de accesibilidad?</span><span class="lng-en">Any accessibility needs?</span></label>
+              <select id="acceso" name="acceso">
+                <option value="no" data-es="Sin requerimientos" data-en="No requirements">Sin requerimientos</option>
+                <option value="mov" data-es="Movilidad reducida" data-en="Reduced mobility">Movilidad reducida</option>
+                <option value="ritmo" data-es="Prefiero ritmo lento" data-en="I prefer a slow pace">Prefiero ritmo lento</option>
+                <option value="otro" data-es="Otro (lo comento abajo)" data-en="Other (I'll note below)">Otro (lo comento abajo)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="mensaje"><span class="lng-es">¿Algo que debamos saber? <span style="text-transform:none;letter-spacing:0">(opcional)</span></span><span class="lng-en">Anything we should know? <span style="text-transform:none;letter-spacing:0">(optional)</span></span></label>
+            <textarea id="mensaje" name="mensaje" rows="2" data-ph-es="Idioma, fechas, intereses, necesidades de acceso…" data-ph-en="Language, dates, interests, access needs…" placeholder="Idioma, fechas, intereses, necesidades de acceso…"></textarea>
+          </div>
+
+          <div class="err" id="formErr"><span class="lng-es">Completa tu nombre y un correo válido.</span><span class="lng-en">Add your name and a valid email.</span></div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-solid"><span class="lng-es">Enviar solicitud</span><span class="lng-en">Send request</span></button>
+            <span class="form-note"><span class="lng-es">Respondemos personalmente, no con un robot.</span><span class="lng-en">We reply personally, not with a robot.</span></span>
+          </div>
+        </form>
+
+        <div class="form-success" id="formSuccess">
+          <div class="mk">✓</div>
+          <h3><span class="lng-es">Gracias. Te escribiremos pronto.</span><span class="lng-en">Thank you. We'll be in touch soon.</span></h3>
+          <p class="svc-desc" style="margin:0 auto;max-width:34ch"><span class="lng-es">Se abrió tu correo con la solicitud lista para enviar a <b>bookingrecreo@pm.me</b>. Si no se abrió, escríbenos a esa dirección. Revisaremos la disponibilidad y te contactaremos personalmente.</span><span class="lng-en">Your email just opened with the request ready to send to <b>bookingrecreo@pm.me</b>. If it didn't, write to us there. We'll check availability and reach out personally.</span></p>
+          <p class="mono" style="margin-top:.4rem">Root · Journey · Rise</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ DESCUBRE / CLICK-TO-SHOW ============ -->
+<section id="descubre" class="pad rule-top" data-screen-label="Descubre">
+  <div class="wrap">
+    <div class="masthead reveal">
+      <div class="mh-l">
+        <span class="kicker"><span class="lng-es">Descubre más</span><span class="lng-en">Discover more</span></span>
+        <h2><span class="lng-es">Todo lo demás,<br />a un <em>clic</em>.</span><span class="lng-en">Everything else,<br />one <em>click</em> away.</span></h2>
+      </div>
+      <span class="folio"><span class="lng-es">Manifiesto · Comunidad · Esporas · Studio · FAQ</span><span class="lng-en">Manifesto · Community · Esporas · Studio · FAQ</span></span>
+    </div>
+    <div class="disclosures">
+      <div class="disc reveal" data-screen-label="FAQ">
+        <button class="disc-head" id="dh-faq" aria-expanded="false" aria-controls="db-faq">
+          <span class="disc-ix">01</span>
+          <span class="disc-tt"><span class="lng-es">Preguntas honestas</span><span class="lng-en">Honest questions</span></span>
+          <span class="disc-meta"><span class="lng-es">Lo que necesitas saber antes de reservar.</span><span class="lng-en">What to know before you book.</span></span>
+          <span class="disc-plus" aria-hidden="true"></span>
+        </button>
+        <div class="disc-body" id="db-faq" role="region" aria-labelledby="dh-faq">
+          <div class="disc-inner">
+<!-- ============ FAQ ============ -->
+<section id="faq" class="pad rule-top" data-screen-label="FAQ">
+  <div class="wrap">
+    <div class="faq-grid">
+      <div class="faq-aside reveal">
+        <div class="pos">
+          <span class="kicker"><span class="lng-es">Sin rodeos</span><span class="lng-en">No runaround</span></span>
+          <h2><span class="lng-es">Preguntas <em>honestas</em>, respuestas honestas.</span><span class="lng-en"><em>Honest</em> questions, honest answers.</span></h2>
+          <p><span class="lng-es">Preferimos decirte la verdad antes de reservar que disculparnos después. Si no encuentras tu pregunta, escríbenos.</span><span class="lng-en">We'd rather tell you the truth before you book than apologize after. If your question isn't here, write to us.</span></p>
+        </div>
+      </div>
+
+      <div class="faq-list reveal d1">
+        <div class="faq-item open">
+          <button class="faq-q" aria-expanded="true"><span class="qn">01</span><span class="qtxt"><span class="lng-es">¿Esto es un tour?</span><span class="lng-en">Is this a tour?</span></span><span class="qx"></span></button>
+          <div class="faq-a"><div class="inner"><span class="lng-es">No. Un tour te lleva a <b>ver</b> cosas; Recreo te invita a <b>hacer</b> y a conversar. No hay banderita ni grupo de cuarenta. Si buscas una lista de monumentos para tachar, no somos para ti —y está bien.</span><span class="lng-en">No. A tour takes you to <b>see</b> things; Recreo invites you to <b>do</b> and to talk. No little flag, no group of forty. If you want a checklist of monuments to tick off, we're not for you —and that's fine.</span></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false"><span class="qn">02</span><span class="qtxt"><span class="lng-es">¿A dónde va mi dinero?</span><span class="lng-en">Where does my money go?</span></span><span class="qx"></span></button>
+          <div class="faq-a"><div class="inner"><span class="lng-es">A la gente que te recibe: guías, cocineros, productores y los espacios que abren sus puertas. Trabajamos <b>sin intermediarios</b> que se queden con la mayor parte. Te lo decimos sin adornos.</span><span class="lng-en">To the people who receive you: guides, cooks, producers and the places that open their doors. We work <b>without middlemen</b> who keep the bulk of it. We'll tell you plainly.</span></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false"><span class="qn">03</span><span class="qtxt"><span class="lng-es">¿Necesito hablar español?</span><span class="lng-en">Do I need to speak Spanish?</span></span><span class="qx"></span></button>
+          <div class="faq-a"><div class="inner"><span class="lng-es">No. Operamos en <b>español e inglés</b>, y varias experiencias son bilingües. Dinos tu idioma al reservar y lo resolvemos.</span><span class="lng-en">No. We operate in <b>Spanish and English</b>, and several experiences are bilingual. Tell us your language when you book and we'll sort it out.</span></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false"><span class="qn">04</span><span class="qtxt"><span class="lng-es">¿Qué tan exigente es físicamente?</span><span class="lng-en">How physically demanding is it?</span></span><span class="qx"></span></button>
+          <div class="faq-a"><div class="inner"><span class="lng-es">Depende de la experiencia. Cada una indica su <b>ritmo y accesibilidad</b> con detalle —desde recorridos planos y pausados hasta jornadas activas a pie. Si tienes dudas sobre movilidad, escríbenos antes y te decimos la verdad.</span><span class="lng-en">It depends on the experience. Each one states its <b>pace and accessibility</b> in detail —from flat, unhurried walks to active days on foot. If you have any doubt about mobility, write to us first and we'll tell you the truth.</span></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false"><span class="qn">05</span><span class="qtxt"><span class="lng-es">¿Puedo ir si tengo movilidad reducida?</span><span class="lng-en">Can I come with reduced mobility?</span></span><span class="qx"></span></button>
+          <div class="faq-a"><div class="inner"><span class="lng-es">Algunas sí, otras no, y preferimos ser honestos en cada caso. <b>«Cocinando Resistencia»</b> es mayormente plana y apta; <b>«¡Aguas!»</b> incluye una caminata tranquila con un picnic. Cuéntanos tus necesidades y te orientamos sin rodeos.</span><span class="lng-en">Some yes, some no, and we'd rather be honest case by case. <b>“Cocinando Resistencia”</b> is mostly flat and accessible; <b>“¡Aguas!”</b> includes an easy walk with a picnic. Tell us your needs and we'll guide you straight.</span></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false"><span class="qn">06</span><span class="qtxt"><span class="lng-es">¿Es seguro?</span><span class="lng-en">Is it safe?</span></span><span class="qx"></span></button>
+          <div class="faq-a"><div class="inner"><span class="lng-es">Sí, y lo tomamos en serio. Grupos pequeños, anfitriones que conocen cada zona, y rutas pensadas con criterio local. La seguridad no está peleada con lo real.</span><span class="lng-en">Yes, and we take it seriously. Small groups, hosts who know each area, and routes planned with local judgment. Safety isn't at odds with the real thing.</span></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false"><span class="qn">07</span><span class="qtxt"><span class="lng-es">¿Cuándo puedo reservar?</span><span class="lng-en">When can I book?</span></span><span class="qx"></span></button>
+          <div class="faq-a"><div class="inner"><span class="lng-es">El lanzamiento público es la <b>semana del 29 de junio al 4 de julio de 2026</b>. Los cupos son limitados y revisamos cada solicitud personalmente.</span><span class="lng-en">The public launch is the <b>week of June 29 – July 4, 2026</b>. Spots are limited and we review every request personally.</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="disc reveal" data-screen-label="Comunidad">
+        <button class="disc-head" id="dh-comunidad" aria-expanded="false" aria-controls="db-comunidad">
+          <span class="disc-ix">02</span>
+          <span class="disc-tt"><span class="lng-es">No viajas solo</span><span class="lng-en">You don't travel alone</span></span>
+          <span class="disc-meta"><span class="lng-es">Grupos pequeños de 6 a 8. Cómo funciona.</span><span class="lng-en">Small groups of 6–8. How it works.</span></span>
+          <span class="disc-plus" aria-hidden="true"></span>
+        </button>
+        <div class="disc-body" id="db-comunidad" role="region" aria-labelledby="dh-comunidad">
+          <div class="disc-inner">
+<!-- ============ COMMUNITY ============ -->
+<section id="comunidad" class="pad" data-screen-label="Comunidad">
+  <div class="wrap">
+    <div class="comm-grid">
+      <div class="comm-photo reveal">
+        <div class="frame"><img src="assets/comm-bag.jpg" alt="Maleta roja con ramo de flores y sombrero — listos para partir juntos" /></div>
+        <p class="caption"><span class="lng-es">Grupos de 6 a 8 — desconocidos que rara vez siguen siéndolo</span><span class="lng-en">Groups of 6 to 8 — strangers who rarely stay that way</span></p>
+      </div>
+      <div class="comm-copy reveal d1">
+        <span class="kicker"><span class="lng-es">La compañía</span><span class="lng-en">The company</span></span>
+        <h2><span class="lng-es">No viajas solo.<br />Viajas con los <em>tuyos</em> —aunque aún no los conozcas.</span><span class="lng-en">You don't travel alone.<br />You travel with <em>your people</em> —even if you haven't met them yet.</span></h2>
+        <p class="lede"><span class="lng-es">Recreo se vive en grupos pequeños de desconocidos que rara vez siguen siéndolo. Tu anfitrión no es un megáfono: te presenta a la ciudad y a las personas con quienes la recorres.</span><span class="lng-en">Recreo happens in small groups of strangers who rarely stay strangers. Your host isn't a megaphone —they introduce you to the city and to the people you walk it with.</span></p>
+        <div class="comm-stats">
+          <div><div class="cn">6–8</div><div class="ck"><span class="lng-es">Personas por grupo</span><span class="lng-en">People per group</span></div></div>
+          <div><div class="cn">1</div><div class="ck"><span class="lng-es">Anfitrión, no un megáfono</span><span class="lng-en">Host, not a megaphone</span></div></div>
+          <div><div class="cn"><span class="lng-es">Día 1</span><span class="lng-en">Day 1</span></div><div class="ck"><span class="lng-es">Ya no son desconocidos</span><span class="lng-en">No longer strangers</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="comm-steps reveal">
+      <div class="comm-step"><span class="sn">01</span><h4><span class="lng-es">Solicitas</span><span class="lng-en">You apply</span></h4><p><span class="lng-es">Cuéntanos quién eres y qué te mueve. No es un carrito de compras: es una conversación.</span><span class="lng-en">Tell us who you are and what moves you. It's not a shopping cart —it's a conversation.</span></p></div>
+      <div class="comm-step"><span class="sn">02</span><h4><span class="lng-es">Te emparejamos</span><span class="lng-en">We match you</span></h4><p><span class="lng-es">Te ubicamos en un grupo pequeño y una fecha que tengan sentido para ti.</span><span class="lng-en">We place you in a small group and a date that make sense for you.</span></p></div>
+      <div class="comm-step"><span class="sn">03</span><h4><span class="lng-es">Se conocen</span><span class="lng-en">You meet</span></h4><p><span class="lng-es">Antes de salir ya sabes con quién vas y quién te recibe. Nada de sorpresas.</span><span class="lng-en">Before you set out you know who you're going with and who'll receive you. No surprises.</span></p></div>
+      <div class="comm-step"><span class="sn">04</span><h4><span class="lng-es">Lo viven</span><span class="lng-en">You live it</span></h4><p><span class="lng-es">Un día juntos. Lo que pasa después —los mensajes, los reencuentros— ya no depende de nosotros.</span><span class="lng-en">One day together. What happens after —the messages, the reunions— is out of our hands.</span></p></div>
+    </div>
+
+    <div class="voices reveal d1">
+      <div class="voice"><q><span class="lng-es">Llegué sola y me fui con cinco personas a las que sigo escribiendo.</span><span class="lng-en">I arrived alone and left with five people I still text.</span></q><div class="vby"><span class="va">MR</span><span class="vn"><b>Marta R.</b><span>Madrid · Fluidos</span></span></div></div>
+      <div class="voice"><q><span class="lng-es">No fue un tour. Fue como si un amigo me prestara su ciudad por un día.</span><span class="lng-en">It wasn't a tour. It was like a friend lending me their city for a day.</span></q><div class="vby"><span class="va">LO</span><span class="vn"><b>Liam O.</b><span>Toronto · Poner la Mesa</span></span></div></div>
+      <div class="voice"><q><span class="lng-es">Entendí más de México en seis horas que en dos semanas de hotel.</span><span class="lng-en">I understood more about Mexico in six hours than in two weeks of hotels.</span></q><div class="vby"><span class="va">YK</span><span class="vn"><b>Yuki K.</b><span>Osaka · ¡Aguas!</span></span></div></div>
+    </div>
+  </div>
+</section>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="disc reveal" data-screen-label="Manifiesto">
+        <button class="disc-head" id="dh-manifiesto-more" aria-expanded="false" aria-controls="db-manifiesto-more">
+          <span class="disc-ix">03</span>
+          <span class="disc-tt"><span class="lng-es">El manifiesto</span><span class="lng-en">The manifesto</span></span>
+          <span class="disc-meta"><span class="lng-es">Por qué la ciudad se cuenta desde adentro.</span><span class="lng-en">Why the city is told from the inside.</span></span>
+          <span class="disc-plus" aria-hidden="true"></span>
+        </button>
+        <div class="disc-body" id="db-manifiesto-more" role="region" aria-labelledby="dh-manifiesto-more">
+          <div class="disc-inner">
+<!-- ============ MANIFESTO / TOLD BY US ============ -->
+<section id="manifiesto" class="pad" data-screen-label="Manifiesto">
+  <div class="wrap">
+    <div class="manifesto-grid">
+      <aside class="manifesto-aside reveal">
+        <span class="kicker">Editorial &nbsp;·&nbsp; Núm. 01</span>
+        <h3 class="big"><span class="lng-es">No se trata <em>sobre</em> nosotros.<br />La contamos <em>nosotros</em>.</span><span class="lng-en">It's not <em>about</em> us.<br />We tell it <em>ourselves</em>.</span></h3>
+        <div class="manifesto-seal"><span class="lng-es">Raíz<br />CDMX<br />Hecho por<br />la ciudad</span><span class="lng-en">Raíz<br />CDMX<br />Made by<br />the city</span></div>
+      </aside>
+
+      <div class="manifesto-content reveal d1">
+        <div class="manifesto-body">
+          <p class="drop lng-es blk">Durante años, alguien más contó esta ciudad. La empacó en rutas, la tradujo a una sola versión y se llevó el valor a otra parte. Raíz nace de una incomodidad simple: la Ciudad de México merece narrarse desde adentro.</p>
+          <p class="drop lng-en blk">For years, someone else told this city to you. They packed it into routes, translated it into a single version, and took the value somewhere else. Raíz starts from a simple discomfort: Mexico City deserves to be told from the inside.</p>
+          <p class="lng-es blk">No somos una agencia. Somos guías, cocineros, productores, fixers y vecinos que decidimos dejar de ser el telón de fondo de la experiencia de alguien más. Aquí, la persona que te recibe no recita un guion: te abre su práctica, su oficio, su barrio.</p>
+          <p class="lng-en blk">We're not an agency. We're guides, cooks, producers, fixers and neighbors who decided to stop being the backdrop to someone else's experience. Here, the person who receives you doesn't recite a script —they open up their craft, their trade, their block.</p>
+          <p class="lng-es blk">Tomamos en serio una idea incómoda para el turismo: que una ciudad no es un producto y su gente no es decorado. Cuando visitas con Raíz, el valor de tu viaje regresa a quienes hacen posible la ciudad —los mismos nombres que aparecen en estas páginas.</p>
+          <p class="lng-en blk">We take seriously an idea that tourism finds inconvenient: a city is not a product and its people are not scenery. When you visit with Raíz, the value of your trip returns to the people who make the city possible —the same names you'll find on these pages.</p>
+          <p class="lng-es blk">No prometemos lo «auténtico»; esa palabra ya está gastada. Prometemos algo más honesto: lo real, con sus contradicciones. La belleza y el hundimiento. La abundancia del mercado y la crisis del agua. La ciudad entera, sin pedir permiso.</p>
+          <p class="lng-en blk">We don't promise the “authentic” —that word is worn out. We promise something more honest: the real thing, contradictions and all. The beauty and the sinking. The abundance of the market and the water crisis. The whole city, without asking permission.</p>
+        </div>
+
+        <ul class="manifesto-principles">
+          <li><span class="pn">01</span><span><span class="lng-es"><b>Contada en primera persona.</b> &nbsp;Quien te guía vive lo que narra.</span><span class="lng-en"><b>Told in the first person.</b> &nbsp;Whoever guides you lives what they tell.</span></span></li>
+          <li><span class="pn">02</span><span><span class="lng-es"><b>El valor se queda.</b> &nbsp;Pagas a la comunidad, no a un intermediario.</span><span class="lng-en"><b>The value stays.</b> &nbsp;You pay the community, not a middleman.</span></span></li>
+          <li><span class="pn">03</span><span><span class="lng-es"><b>Real antes que auténtico.</b> &nbsp;Mostramos la ciudad con sus tensiones.</span><span class="lng-en"><b>Real before authentic.</b> &nbsp;We show the city with its tensions.</span></span></li>
+          <li><span class="pn">04</span><span><span class="lng-es"><b>Grupos pequeños.</b> &nbsp;Una conversación, no una multitud.</span><span class="lng-en"><b>Small groups.</b> &nbsp;A conversation, not a crowd.</span></span></li>
+        </ul>
+
+        <p class="manifesto-sign"><span class="lng-es">—El colectivo Raíz</span><span class="lng-en">—The Raíz collective</span><span>Ciudad de México · 2026</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="disc reveal" data-screen-label="Servicios">
+        <button class="disc-head" id="dh-servicios" aria-expanded="false" aria-controls="db-servicios">
+          <span class="disc-ix">04</span>
+          <span class="disc-tt"><span class="lng-es">Una raíz, tres expresiones</span><span class="lng-en">One root, three expressions</span></span>
+          <span class="disc-meta"><span class="lng-es">Recreo, Esporas y Raíz Studio.</span><span class="lng-en">Recreo, Esporas and Raíz Studio.</span></span>
+          <span class="disc-plus" aria-hidden="true"></span>
+        </button>
+        <div class="disc-body" id="db-servicios" role="region" aria-labelledby="dh-servicios">
+          <div class="disc-inner">
+<!-- ============ SERVICIOS / INDEX ============ -->
+<section id="servicios" class="pad rule-top" data-screen-label="Servicios">
+  <div class="wrap">
+    <div class="masthead reveal">
+      <div class="mh-l">
+        <span class="kicker"><span class="lng-es">El índice</span><span class="lng-en">The index</span></span>
+        <h2><span class="lng-es">Una raíz, <em>tres</em> expresiones.</span><span class="lng-en">One root, <em>three</em> expressions.</span></h2>
+      </div>
+      <span class="folio"><span class="lng-es">Sección 01 — 03</span><span class="lng-en">Section 01 — 03</span></span>
+    </div>
+
+    <div class="svc-grid">
+      <a href="#recreo" class="svc reveal" data-c="clay">
+        <span class="svc-idx"><b>01</b> — <span class="lng-es">Experiencias</span><span class="lng-en">Experiences</span></span>
+        <h3 class="svc-name">Recreo</h3>
+        <span class="svc-tag">By Raíz · Experiences</span>
+        <p class="svc-desc"><span class="lng-es">Experiencias de un día, hechas a la medida. Tres colecciones, cada una un mundo. Conexión, juego y curiosidad por encima del consumo.</span><span class="lng-en">One-day experiences, tailored by hand. Three collections, each its own world. Connection, play and curiosity over consumption.</span></p>
+        <div class="svc-keys"><span><span class="lng-es">Conexión</span><span class="lng-en">Connection</span></span><span><span class="lng-es">Juego</span><span class="lng-en">Play</span></span><span><span class="lng-es">Curiosidad</span><span class="lng-en">Curiosity</span></span></div>
+        <span class="svc-more"><span class="lng-es">Ver las tres &nbsp;→</span><span class="lng-en">See all three &nbsp;→</span></span>
+      </a>
+
+      <a href="#esporas" class="svc reveal d1" data-c="moss">
+        <span class="svc-idx"><b>02</b> — Editorial</span>
+        <h3 class="svc-name">Esporas</h3>
+        <span class="svc-tag">By Raíz · Editorial</span>
+        <p class="svc-desc"><span class="lng-es">El brazo editorial de Raíz. Despachos, cuadernos y handbooks —y la revista <b>Détente</b>, una guía de campo bilingüe a la ciudad en temporada.</span><span class="lng-en">Raíz's editorial arm. Dispatches, notebooks and handbooks —and the magazine <b>Détente</b>, a bilingual field guide to the city in season.</span></p>
+        <div class="svc-keys"><span>Détente</span><span><span class="lng-es">Despachos</span><span class="lng-en">Dispatches</span></span><span>Handbooks</span></div>
+        <span class="svc-more"><span class="lng-es">Conoce Détente &nbsp;→</span><span class="lng-en">Meet Détente &nbsp;→</span></span>
+      </a>
+
+      <a href="#studio" class="svc reveal d2" data-c="slate">
+        <span class="svc-idx"><b>03</b> — <span class="lng-es">Consultoría</span><span class="lng-en">Consulting</span></span>
+        <h3 class="svc-name">Raíz Studio</h3>
+        <span class="svc-tag">Training &amp; Consulting</span>
+        <p class="svc-desc"><span class="lng-es">Formación de equipos, gestión de crisis y diseño de viaje a la medida para operadores y servicios de concierge.</span><span class="lng-en">Team training, crisis management and bespoke travel design for operators and concierge services.</span></p>
+        <div class="svc-keys"><span>Training</span><span>Consulting</span><span>Travel design</span></div>
+        <span class="svc-more"><span class="lng-es">Hablemos &nbsp;→</span><span class="lng-en">Let's talk &nbsp;→</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="disc reveal" data-screen-label="Esporas">
+        <button class="disc-head" id="dh-esporas" aria-expanded="false" aria-controls="db-esporas">
+          <span class="disc-ix">05</span>
+          <span class="disc-tt"><span class="lng-es">Esporas & Détente</span><span class="lng-en">Esporas & Détente</span></span>
+          <span class="disc-meta"><span class="lng-es">El brazo editorial y la revista — Nº 01 y Nº 02.</span><span class="lng-en">The editorial arm and the magazine — issues No. 01 &amp; 02.</span></span>
+          <span class="disc-plus" aria-hidden="true"></span>
+        </button>
+        <div class="disc-body" id="db-esporas" role="region" aria-labelledby="dh-esporas">
+          <div class="disc-inner">
+<!-- ============ ESPORAS / EDITORIAL (publishes Détente) ============ -->
+<section id="esporas" class="pad" data-screen-label="Esporas">
+  <div class="wrap">
+    <div class="masthead reveal">
+      <div class="mh-l">
+        <span class="kicker"><span class="lng-es">Esporas · El brazo editorial</span><span class="lng-en">Esporas · The editorial arm</span></span>
+        <h2><span class="lng-es">Lo que aprendemos,<br /><em>impreso</em>.</span><span class="lng-en">What we learn,<br /><em>in print</em>.</span></h2>
+      </div>
+      <span class="folio"><span class="lng-es">Editorial · Publica Détente</span><span class="lng-en">Editorial · Publisher of Détente</span></span>
+    </div>
+
+    <p class="lede reveal d1" style="max-width:62ch;color:var(--ink-dim);margin-bottom:clamp(28px,4vh,44px)"><span class="lng-es">Esporas es la editorial de Raíz: despachos, cuadernos y handbooks que llevan la voz de la ciudad a la página. Su primer título mayor es <b style="color:var(--ink)">Détente</b> —una guía de campo bilingüe a la Ciudad de México en temporada.</span><span class="lng-en">Esporas is Raíz's publishing house: dispatches, notebooks and handbooks that carry the city's voice to the page. Its first major title is <b style="color:var(--ink)">Détente</b> —a bilingual field guide to Mexico City in season.</span></p>
+
+    <!-- Détente Nº 02 (latest) -->
+    <article class="detente reveal" data-screen-label="Esporas · Détente Nº 02">
+      <div class="detente-cover">
+        <div class="dc-top">
+          <span class="dc-mark">
+            <svg viewBox="0 0 100 100" aria-hidden="true"><line x1="40" y1="20" x2="58" y2="32" stroke="var(--brasa)" stroke-width="7.5" stroke-linecap="round" /><g stroke="currentColor" stroke-width="9" stroke-linecap="round"><line x1="40" y1="44" x2="40" y2="82" /><line x1="60" y1="44" x2="60" y2="82" /></g></svg>
+            By Raíz
+          </span>
+          <span><span class="lng-es">Número 02 · Último</span><span class="lng-en">Issue 02 · Latest</span></span>
+        </div>
+        <div>
+          <div class="dc-title">D<span class="seed">é</span>tente</div>
+          <div class="dc-sub"><span class="lng-es">Field Guide · Afición y equipo</span><span class="lng-en">Field Guide · Fandom &amp; team</span></div>
+        </div>
+        <div class="dc-top"><span>Esporas Editorial</span><span>ES / EN</span></div>
+      </div>
+      <div class="detente-body">
+        <span class="db-kicker"><span class="lng-es">La revista de Esporas · Nº 02 · Último número</span><span class="lng-en">The Esporas magazine · No. 02 · Latest issue</span></span>
+        <h3><span class="lng-es">Elige bien, pierde bien, canta mejor.</span><span class="lng-en">Choose well, lose well, sing better.</span></h3>
+        <p><span class="lng-es">Sobre armar la banda, conocer a los tuyos y querer al desfavorito. Apoya a tu equipo, pierde con clase y ponte otra camiseta sin cambiar de alma. La misma honestidad de Raíz, en formato de bolsillo y a dos idiomas.</span><span class="lng-en">On getting the band together, knowing your people, and rooting for the underdog. Back your team, lose with class, then put on another shirt without changing your soul. The same Raíz honesty, pocket-sized and in two languages.</span></p>
+        <div class="db-meta"><span><span class="lng-es">Bilingüe ES/EN</span><span class="lng-en">Bilingual ES/EN</span></span><span><span class="lng-es">Afición</span><span class="lng-en">Fandom</span></span><span><span class="lng-es">Temporada · 2026</span><span class="lng-en">In season · 2026</span></span></div>
+        <div style="display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap">
+          <a href="detente-no-02.html" target="_blank" rel="noopener" class="db-cta"><span class="lng-es">Lee Détente Nº 02 &nbsp;→</span><span class="lng-en">Read Détente No. 02 &nbsp;→</span></a>
+          <a href="#rsvp" class="db-cta" style="color:var(--ink-dim);border-color:var(--rule)"><span class="lng-es">Reserva tu ejemplar</span><span class="lng-en">Reserve a copy</span></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Détente magazine feature -->
+    <article class="detente reveal" data-screen-label="Esporas · Détente">
+      <div class="detente-cover">
+        <div class="dc-top">
+          <span class="dc-mark">
+            <svg viewBox="0 0 100 100" aria-hidden="true"><line x1="40" y1="20" x2="58" y2="32" stroke="var(--brasa)" stroke-width="7.5" stroke-linecap="round" /><g stroke="currentColor" stroke-width="9" stroke-linecap="round"><line x1="40" y1="44" x2="40" y2="82" /><line x1="60" y1="44" x2="60" y2="82" /></g></svg>
+            By Raíz
+          </span>
+          <span><span class="lng-es">Número 01</span><span class="lng-en">Issue 01</span></span>
+        </div>
+        <div>
+          <div class="dc-title">D<span class="seed">é</span>tente</div>
+          <div class="dc-sub"><span class="lng-es">Field Guide · CDMX en temporada</span><span class="lng-en">Field Guide · CDMX in season</span></div>
+        </div>
+        <div class="dc-top"><span>Esporas Editorial</span><span>ES / EN</span></div>
+      </div>
+      <div class="detente-body">
+        <span class="db-kicker"><span class="lng-es">La revista de Esporas · Nº 01 · Número anterior</span><span class="lng-en">The Esporas magazine · No. 01 · Previous issue</span></span>
+        <h3><span class="lng-es">El Mundial, leído desde la ciudad.</span><span class="lng-en">The World Cup, read from the city.</span></h3>
+        <p><span class="lng-es">Una guía de campo para vivir la Copa 2026 sin perder la ciudad real: dónde comer, cómo moverse, qué no creer y a quién escuchar. La misma honestidad de Raíz, en formato de bolsillo y a dos idiomas.</span><span class="lng-en">A field guide for living the 2026 World Cup without losing the real city: where to eat, how to move, what not to believe, and who to listen to. The same Raíz honesty, pocket-sized and in two languages.</span></p>
+        <div class="db-meta"><span><span class="lng-es">Bilingüe ES/EN</span><span class="lng-en">Bilingual ES/EN</span></span><span><span class="lng-es">Guía de campo</span><span class="lng-en">Field guide</span></span><span><span class="lng-es">Temporada · 2026</span><span class="lng-en">In season · 2026</span></span></div>
+        <div style="display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap">
+          <a href="detente-no-01.html" target="_blank" rel="noopener" class="db-cta"><span class="lng-es">Lee Détente Nº 01 &nbsp;→</span><span class="lng-en">Read Détente No. 01 &nbsp;→</span></a>
+          <a href="#rsvp" class="db-cta" style="color:var(--ink-dim);border-color:var(--rule)"><span class="lng-es">Reserva tu ejemplar</span><span class="lng-en">Reserve a copy</span></a>
+        </div>
+      </div>
+    </article>
+
+    <div class="disp-grid reveal">
+      <article class="dispatch lead-disp">
+        <div class="d-meta"><span class="d-cat"><span class="lng-es">Despacho · Agua</span><span class="lng-en">Dispatch · Water</span></span><span class="loc">Cárcamo de Dolores</span></div>
+        <h3><span class="lng-es">El río que Diego Rivera pintó antes de que se secara</span><span class="lng-en">The river Diego Rivera painted before it ran dry</span></h3>
+        <p class="d-excerpt"><span class="lng-es">En el Cárcamo de Dolores, Rivera pintó el agua que llegaba del Lerma como una promesa. Ochenta años después, esa misma ciudad trae su agua desde más lejos y la paga más caro en las periferias. El mural sigue ahí; el lago, no. Aprendí a leer la crisis del agua entre lo que se pintó y lo que se secó.</span><span class="lng-en">At the Cárcamo de Dolores, Rivera painted the water arriving from the Lerma as a promise. Eighty years on, that same city hauls its water from farther away and the peripheries pay the most for it. The mural is still there; the lake isn't. I learned to read the water crisis between what was painted and what dried up.</span></p>
+        <div class="d-foot"><span class="d-by"><span class="lng-es">Por Sergio M. · ¡Aguas!</span><span class="lng-en">By Sergio M. · ¡Aguas!</span></span><span class="d-read"><span class="lng-es">● 6 min de lectura</span><span class="lng-en">● 6 min read</span></span></div>
+      </article>
+
+      <article class="dispatch">
+        <div class="d-meta"><span class="d-cat"><span class="lng-es">Despacho · Mesa</span><span class="lng-en">Dispatch · Table</span></span><span class="loc">Las Duelistas</span></div>
+        <h3><span class="lng-es">Cien años sirviendo pulque, contra todo pronóstico</span><span class="lng-en">A hundred years pouring pulque, against the odds</span></h3>
+        <p class="d-excerpt"><span class="lng-es">La pulquería lleva más de un siglo abierta porque mucha gente quiso que cerrara. Beber un curado de temporada aquí no es nostalgia: es entender qué resiste, quién lo sostiene y por qué la mesa también es un campo de batalla.</span><span class="lng-en">The pulquería has stayed open for over a century because plenty of people wanted it gone. Drinking a seasonal curado here isn't nostalgia: it's understanding what resists, who keeps it alive, and why the table is a battlefield too.</span></p>
+        <div class="d-foot"><span class="d-by"><span class="lng-es">Por Ana C. · Cocinando Resistencia</span><span class="lng-en">By Ana C. · Cocinando Resistencia</span></span><span class="d-read"><span class="lng-es">● 4 min</span><span class="lng-en">● 4 min</span></span></div>
+      </article>
+
+      <article class="dispatch">
+        <div class="d-meta"><span class="d-cat"><span class="lng-es">Cuaderno</span><span class="lng-en">Notebook</span></span><span class="loc"><span class="lng-es">Laboratorio</span><span class="lng-en">The Lab</span></span></div>
+        <h3><span class="lng-es">Lo que se cuece en el laboratorio</span><span class="lng-en">What's brewing in the lab</span></h3>
+        <p class="d-excerpt"><span class="lng-es">Una nueva colección está en preparación. No la anunciamos hasta que esté lista —la misma terquedad de siempre: probar, equivocarnos, volver a la calle. Cuando abra, lo sabrás aquí primero.</span><span class="lng-en">A new collection is in the making. We won't announce it until it's ready —the same old stubbornness: test, get it wrong, go back to the street. When it opens, you'll hear it here first.</span></p>
+        <div class="d-foot"><span class="d-by"><span class="lng-es">Por el equipo Raíz</span><span class="lng-en">By the Raíz team</span></span><span class="d-read"><span class="lng-es">● 3 min</span><span class="lng-en">● 3 min</span></span></div>
+      </article>
+    </div>
+
+    <div class="disp-foot reveal d1">
+      <p class="mono"><span class="lng-es">Détente Nº 02 — Afición · Nº 01 — Copa 2026 · También en Esporas: «Slow CDMX»</span><span class="lng-en">Détente No. 02 — Fandom · No. 01 — World Cup 2026 · Also from Esporas: “Slow CDMX”</span></p>
+      <a href="detente-no-02.html" target="_blank" rel="noopener" class="btn"><span class="lng-es">Lee Détente Nº 02 &nbsp;→</span><span class="lng-en">Read Détente No. 02 &nbsp;→</span></a>
+    </div>
+  </div>
+</section>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="disc reveal" data-screen-label="Fundadores">
+        <button class="disc-head" id="dh-fundadores" aria-expanded="false" aria-controls="db-fundadores">
+          <span class="disc-ix">06</span>
+          <span class="disc-tt"><span class="lng-es">Quiénes fundaron Raíz</span><span class="lng-en">Who founded Raíz</span></span>
+          <span class="disc-meta"><span class="lng-es">Fernanda Resendiz y Cesar Jeronimo Esquinca.</span><span class="lng-en">Fernanda Resendiz and Cesar Jeronimo Esquinca.</span></span>
+          <span class="disc-plus" aria-hidden="true"></span>
+        </button>
+        <div class="disc-body" id="db-fundadores" role="region" aria-labelledby="dh-fundadores">
+          <div class="disc-inner">
+            <p class="lede reveal d1" style="max-width:62ch;margin-bottom:clamp(34px,5vh,60px)"><span class="lng-es">No contratamos narradores. Raíz la sostienen dos raíces —estrategia de viaje de clase mundial y oficio de territorio— y un equipo de especialistas que conoce cada línea desde adentro.</span><span class="lng-en">We don't hire narrators. Raíz is held up by two roots —world-class travel strategy and the craft of the territory— and a team of specialists who know each line from the inside.</span></p>
+            <div class="founders">
+      <article class="founder-card reveal" data-c="slate">
+        <div class="fc-top">
+          <span class="fc-avatar"><img src="assets/team-fernanda.jpg" alt="Fernanda Resendiz" /></span>
+          <div class="fc-id">
+            <span class="fc-role"><span class="lng-es">Co-fundadora · Strategy</span><span class="lng-en">Co-founder · Strategy</span></span>
+            <h3 class="fc-name">Fernanda Resendiz</h3>
+            <span class="fc-disc">Travel &amp; Experience Design</span>
+          </div>
+        </div>
+        <p class="fc-bio"><span class="lng-es">Una década en el corazón de la aerolínea más grande de México: customer journeys, estrategia con el C-suite y planeación de red. Las mejores experiencias de viaje no son accidentales —se diseñan.</span><span class="lng-en">A decade at the heart of Mexico's largest airline: customer journeys, C-suite strategy and network planning. The best travel experiences aren't accidental —they're designed.</span></p>
+        <ul class="fc-cred">
+          <li><span>01</span> Aeroméxico — Chief of Staff to CEO</li>
+          <li><span>02</span> Customer Experience · Network Planning</li>
+          <li><span>03</span> <span class="lng-es">ITAM — Relaciones Internacionales</span><span class="lng-en">ITAM — International Relations</span></li>
+        </ul>
+      </article>
+      <article class="founder-card reveal d1" data-c="clay">
+        <div class="fc-top">
+          <span class="fc-avatar"><img src="assets/team-cesar.jpg" alt="Cesar Jeronimo Esquinca" /></span>
+          <div class="fc-id">
+            <span class="fc-role"><span class="lng-es">Co-fundador · Cultura</span><span class="lng-en">Co-founder · Culture</span></span>
+            <h3 class="fc-name">Cesar Jeronimo Esquinca</h3>
+            <span class="fc-disc"><span class="lng-es">Facilitador · Cocinero de raíz</span><span class="lng-en">Facilitator · Roots cook</span></span>
+          </div>
+        </div>
+        <p class="fc-bio"><span class="lng-es">Más de quince años en la intersección entre territorio, gastronomía y comunidad. Ha cocinado en Italia, Inglaterra y Francia, posicionado mezcal artesanal y coordinado respuesta de emergencia en tres continentes.</span><span class="lng-en">Over fifteen years at the intersection of territory, gastronomy and community. He has cooked in Italy, England and France, positioned artisanal mezcal, and coordinated emergency response across three continents.</span></p>
+        <ul class="fc-cred">
+          <li><span>01</span> <span class="lng-es">Bonito Mezcal — Estratega de valor</span><span class="lng-en">Bonito Mezcal — Value strategist</span></li>
+          <li><span>02</span> <span class="lng-es">Médicos Sin Fronteras — Respuesta de emergencia</span><span class="lng-en">Doctors Without Borders — Emergency response</span></li>
+          <li><span>03</span> <span class="lng-es">Institut Paul Bocuse — Cocina de mercado</span><span class="lng-en">Institut Paul Bocuse — Market cooking</span></li>
+        </ul>
+      </article>
+    </div>
+          </div>
+        </div>
+      </div>
+      <div class="disc reveal" data-screen-label="Studio">
+        <button class="disc-head" id="dh-studio" aria-expanded="false" aria-controls="db-studio">
+          <span class="disc-ix">07</span>
+          <span class="disc-tt"><span class="lng-es">Raíz Studio · Asesoría</span><span class="lng-en">Raíz Studio · Advisory</span></span>
+          <span class="disc-meta"><span class="lng-es">Formación y consultoría para operadores.</span><span class="lng-en">Training and consulting for operators.</span></span>
+          <span class="disc-plus" aria-hidden="true"></span>
+        </button>
+        <div class="disc-body" id="db-studio" role="region" aria-labelledby="dh-studio">
+          <div class="disc-inner">
+<!-- ============ STUDIO / ADVISORY + TRAINING ============ -->
+<section id="studio" class="studio pad rule-top" data-screen-label="Studio">
+  <div class="wrap">
+    <div class="masthead reveal">
+      <div class="mh-l">
+        <span class="kicker">Raíz Studio · Bespoke</span>
+        <h2><span class="lng-es">Asesoría y <em>formación</em><br />con sensibilidad cultural.</span><span class="lng-en">Advisory and <em>training</em><br />with cultural sensibility.</span></h2>
+      </div>
+      <span class="folio">Advisory &amp; Training</span>
+    </div>
+    <p class="lede reveal d1" style="max-width:62ch;margin-bottom:clamp(34px,5vh,56px)"><span class="lng-es">Más allá de la experiencia: ayudamos a operadores, hoteles y servicios de concierge a diseñar viaje y a recibir mejor —travel design privado, consultoría y formación de equipos con la misma sensibilidad cultural que define a Raíz.</span><span class="lng-en">Beyond the experience: we help operators, hotels and concierge services design travel and host better —private travel design, consulting and team training with the same cultural sensibility that defines Raíz.</span></p>
+
+    <div class="studio-grid">
+      <article class="studio-card reveal" data-c="clay">
+        <span class="sc-idx"><b>01</b> — Training</span>
+        <h3 class="sc-name">Staff Training</h3>
+        <p class="sc-line"><span class="lng-es">Experiencia del huésped intercultural.</span><span class="lng-en">The intercultural guest experience.</span></p>
+        <p class="sc-desc"><span class="lng-es">Formamos equipos de contacto para leer y servir a huéspedes de culturas distintas —del primer saludo a la despedida— sin perder lo propio.</span><span class="lng-en">We train front-line teams to read and serve guests from different cultures —from the first hello to the goodbye— without losing who they are.</span></p>
+      </article>
+      <article class="studio-card reveal d1" data-c="moss">
+        <span class="sc-idx"><b>02</b> — Advisory</span>
+        <h3 class="sc-name">Crisis &amp; Safety</h3>
+        <p class="sc-line"><span class="lng-es">Gestión de riesgo en alto contacto.</span><span class="lng-en">High-contact risk management.</span></p>
+        <p class="sc-desc"><span class="lng-es">Protocolos y acompañamiento para operar con seguridad en entornos complejos, con experiencia real de respuesta de emergencia en tres continentes.</span><span class="lng-en">Protocols and support to operate safely in complex environments, with real emergency-response experience across three continents.</span></p>
+      </article>
+      <article class="studio-card reveal d2" data-c="slate">
+        <span class="sc-idx"><b>03</b> — Design</span>
+        <h3 class="sc-name">Travel Design</h3>
+        <p class="sc-line"><span class="lng-es">Itinerarios bespoke para operadores.</span><span class="lng-en">Bespoke itineraries for operators.</span></p>
+        <p class="sc-desc"><span class="lng-es">Diseño de viaje privado y a la medida —la misma metodología de Recreo, puesta al servicio de tu marca y tus huéspedes.</span><span class="lng-en">Private, made-to-measure travel design —the same Recreo methodology, put to work for your brand and your guests.</span></p>
+      </article>
+    </div>
+
+    <div class="studio-foot reveal d1">
+      <p class="mono"><span class="lng-es">Para operadores, hoteles y concierge · CDMX y a distancia</span><span class="lng-en">For operators, hotels and concierge · CDMX &amp; remote</span></p>
+      <a href="mailto:alaraiz@pm.me?subject=Ra%C3%ADz%20Studio%20%C2%B7%20Advisory%20%26%20Training&body=Hola%20Ra%C3%ADz%20Studio%2C%0A%0AMe%20gustar%C3%ADa%20hablar%20sobre%3A%20(staff%20training%20%2F%20crisis%20%26%20safety%20%2F%20travel%20design)%0AOrganizaci%C3%B3n%3A%0AEquipo%2Fcontexto%3A%0A%0AGracias." class="btn btn-solid"><span class="lng-es">Hablemos de tu equipo</span><span class="lng-en">Let's talk about your team</span></a>
+    </div>
+  </div>
+</section>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============ FOOTER ============ -->
+<footer data-screen-label="Footer">
+  <div class="wrap">
+    <p class="foot-manifesto reveal"><span class="lng-es">Esto no es un tour.<br />Es una <em>introducción</em>.</span><span class="lng-en">This isn't a tour.<br />It's an <em>introduction</em>.</span></p>
+    <div class="foot-bottom">
+      <div class="foot-cols">
+        <div class="col"><span class="mono"><span class="lng-es">Navega</span><span class="lng-en">Navigate</span></span><a href="#manifiesto"><span class="lng-es">Manifiesto</span><span class="lng-en">Manifesto</span></a><a href="#recreo">Recreo</a><a href="#comunidad"><span class="lng-es">Comunidad</span><span class="lng-en">Community</span></a><a href="#especialistas"><span class="lng-es">Acompañantes</span><span class="lng-en">Hosts</span></a><a href="#studio">Studio</a><a href="https://app.alaraiz.mx/eventos"><span class="lng-es">Ver eventos</span><span class="lng-en">Browse events</span></a></div>
+        <div class="col"><span class="mono">Esporas</span><a href="detente-no-02.html" target="_blank" rel="noopener">Détente · Nº 02</a><a href="detente-no-01.html" target="_blank" rel="noopener">Détente · Nº 01</a><a href="#esporas"><span class="lng-es">Despachos</span><span class="lng-en">Dispatches</span></a><a href="#esporas">Slow CDMX</a></div>
+        <div class="col"><span class="mono"><span class="lng-es">Contacto</span><span class="lng-en">Contact</span></span><a href="#rsvp"><span class="lng-es">Reserva tu lugar</span><span class="lng-en">Save your spot</span></a><a href="mailto:recreobyraiz@pm.me?subject=Recreo%20%C2%B7%20Consulta%20de%20experiencias"><span class="lng-es">Experiencias · recreobyraiz@pm.me</span><span class="lng-en">Experiences · recreobyraiz@pm.me</span></a><a href="mailto:alaraiz@pm.me?subject=Ra%C3%ADz%20%C2%B7%20Consulta%20general"><span class="lng-es">General, Esporas y advisory · alaraiz@pm.me</span><span class="lng-en">General, Esporas &amp; advisory · alaraiz@pm.me</span></a><a href="https://alaraiz.mx">alaraiz.mx</a></div>
+        <div class="col"><span class="mono"><span class="lng-es">Síguenos</span><span class="lng-en">Follow</span></span><a href="https://instagram.com/a.la.ra.iz" target="_blank" rel="noopener">Raíz · @a.la.ra.iz</a><a href="https://instagram.com/recreobyraiz" target="_blank" rel="noopener">Recreo · @recreobyraiz</a><a href="https://instagram.com/detentebyraiz" target="_blank" rel="noopener">Détente · @detentebyraiz</a></div>
+      </div>
+      <a href="#top" class="brand">Raíz<span class="dot"></span></a>
+    </div>
+    <div class="colophon">
+      <span>© Raíz · CDMX · 2026</span>
+      <span><span class="lng-es">Contada por quienes la viven</span><span class="lng-en">Told by the people who live it</span></span>
+      <span>Space Grotesk · Hanken Grotesk</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ TWEAKS ============ -->
+<div id="tweaks-root"></div>
+
+<!-- app JS -->
+<script>
+  // sticky nav
+  const nav = document.getElementById('nav');
+  const onScroll = () => { nav.classList.toggle('scrolled', window.scrollY > 30); };
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // ===== EN / ES language toggle =====
+  (function(){
+    const root = document.documentElement;
+    const btns = document.querySelectorAll('.lang-toggle button');
+    function applyLang(lang){
+      root.setAttribute('data-lang', lang);
+      root.setAttribute('lang', lang);
+      btns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.langSet === lang)));
+      // placeholders
+      document.querySelectorAll('[data-ph-'+lang+']').forEach(el => {
+        el.setAttribute('placeholder', el.getAttribute('data-ph-'+lang));
+      });
+      // select option labels
+      document.querySelectorAll('option[data-'+lang+']').forEach(op => {
+        op.textContent = op.getAttribute('data-'+lang);
+      });
+      try { localStorage.setItem('raiz-lang', lang); } catch(e){}
+    }
+    let saved = 'es';
+    try { saved = localStorage.getItem('raiz-lang') || 'es'; } catch(e){}
+    applyLang(saved);
+    btns.forEach(b => b.addEventListener('click', () => applyLang(b.dataset.langSet)));
+  })();
+
+  // reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.12, rootMargin:'0px 0px -7% 0px'});
+  document.querySelectorAll('.reveal:not(.in)').forEach(el => io.observe(el));
+
+  // chips
+  document.querySelectorAll('#chips .chip').forEach(c => {
+    const toggle = () => c.setAttribute('aria-pressed', String(c.getAttribute('aria-pressed') !== 'true'));
+    c.addEventListener('click', toggle);
+    c.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); toggle(); } });
+  });
+
+  // faq accordion
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.closest('.faq-item');
+      const open = item.classList.contains('open');
+      item.classList.toggle('open', !open);
+      q.setAttribute('aria-expanded', String(!open));
+    });
+  });
+
+  // recreo horizontal rail
+  const rail = document.getElementById('recRail');
+  if (rail) {
+    const arrows = document.querySelectorAll('.rec-arrow');
+    const update = () => {
+      const max = rail.scrollWidth - rail.clientWidth - 2;
+      arrows.forEach(b => {
+        const dir = parseInt(b.dataset.dir, 10);
+        const atStart = rail.scrollLeft <= 2, atEnd = rail.scrollLeft >= max;
+        b.disabled = (dir < 0 && atStart) || (dir > 0 && atEnd);
+      });
+    };
+    arrows.forEach(btn => btn.addEventListener('click', () => {
+      const dir = parseInt(btn.dataset.dir, 10);
+      const card = rail.querySelector('.rec-card');
+      const step = card ? card.getBoundingClientRect().width + 22 : 360;
+      rail.scrollBy({ left: dir * step, behavior: 'smooth' });
+    }));
+    rail.addEventListener('scroll', update, {passive:true});
+    window.addEventListener('resize', update);
+    update();
+  }
+
+  // form
+  const form = document.getElementById('rsvpForm');
+  const err = document.getElementById('formErr');
+  const success = document.getElementById('formSuccess');
+  const validEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  const BOOKING_EMAIL = 'bookingrecreo@pm.me';
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nombre = document.getElementById('nombre').value.trim();
+    const email = document.getElementById('email').value.trim();
+    if (!nombre || !validEmail(email)) {
+      err.classList.add('show');
+      [document.getElementById('nombre'), document.getElementById('email')].forEach(f => {
+        if (!f.value.trim() || (f.type === 'email' && !validEmail(f.value.trim()))) f.style.borderColor = 'var(--clay)';
+      });
+      return;
+    }
+    err.classList.remove('show');
+
+    // gather booking details and compose an email to the booking inbox
+    const en = document.documentElement.getAttribute('data-lang') === 'en';
+    const exps = [...document.querySelectorAll('#chips .chip[aria-pressed="true"]')].map(c => c.dataset.v).join(', ') || (en ? '—' : '—');
+    const personasSel = document.getElementById('personas');
+    const personas = personasSel.value;
+    const accesoSel = document.getElementById('acceso');
+    const accesoOpt = accesoSel.options[accesoSel.selectedIndex];
+    const acceso = accesoOpt.getAttribute(en ? 'data-en' : 'data-es') || accesoOpt.value;
+    const mensaje = document.getElementById('mensaje').value.trim();
+
+    const subject = (en ? 'Recreo · Booking request — ' : 'Recreo · Solicitud de reserva — ') + nombre;
+    const L = en
+      ? ['New booking request via alaraiz.mx', '', 'Name: ' + nombre, 'Email: ' + email, 'Experience: ' + exps, 'People: ' + personas, 'Accessibility: ' + acceso, 'Notes: ' + (mensaje || '—'), '', '— Sent from the Recreo booking form']
+      : ['Nueva solicitud de reserva vía alaraiz.mx', '', 'Nombre: ' + nombre, 'Correo: ' + email, 'Experiencia: ' + exps, 'Personas: ' + personas, 'Accesibilidad: ' + acceso, 'Notas: ' + (mensaje || '—'), '', '— Enviado desde el formulario de reservas de Recreo'];
+    const href = 'mailto:' + BOOKING_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(L.join('\n'));
+
+    form.style.display = 'none';
+    success.classList.add('show');
+    // open the user's mail client with everything prefilled
+    window.location.href = href;
+  });
+  ['nombre','email'].forEach(id => {
+    document.getElementById(id).addEventListener('input', (e) => { e.target.style.borderColor=''; err.classList.remove('show'); });
+  });
+  // ===== click-to-show disclosures =====
+  (function(){
+    function openDisc(disc){
+      if(!disc || disc.classList.contains('open')) return;
+      disc.classList.add('open');
+      var h=disc.querySelector('.disc-head'); if(h) h.setAttribute('aria-expanded','true');
+      disc.querySelectorAll('.reveal').forEach(function(r){r.classList.add('in');});
+    }
+    document.querySelectorAll('.disc-head').forEach(function(h){
+      h.addEventListener('click',function(){
+        var disc=h.closest('.disc');
+        var open=disc.classList.toggle('open');
+        h.setAttribute('aria-expanded',String(open));
+        if(open) disc.querySelectorAll('.reveal').forEach(function(r){r.classList.add('in');});
+      });
+    });
+    document.addEventListener('click',function(e){
+      var a=e.target.closest && e.target.closest('a[href^="#"]');
+      if(!a) return;
+      var id=a.getAttribute('href').slice(1);
+      if(!id) return;
+      var tgt=document.getElementById(id);
+      if(!tgt) return;
+      e.preventDefault();
+      var disc=tgt.closest('.disc');
+      if(disc) openDisc(disc);
+      var doScroll=function(){ var y=tgt.getBoundingClientRect().top+window.scrollY-72; window.scrollTo({top:y,behavior:'smooth'}); };
+      if(disc){ setTimeout(doScroll,90); } else { doScroll(); }
+    });
+  })();
+</script>
+
+<!-- React + Babel for Tweaks panel -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel">
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "dark": true,
+    "accent": "oklch(0.68 0.115 50)",
+    "headingFont": "\"Space Grotesk\", system-ui, sans-serif",
+    "accessibility": true,
+    "voice": "lit"
+  }/*EDITMODE-END*/;
+
+  function RaizTweaks(){
+    const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+    React.useEffect(() => {
+      const r = document.documentElement;
+      r.setAttribute('data-theme', t.dark ? 'dark' : 'light');
+      r.style.setProperty('--accent', t.accent);
+      r.style.setProperty('--font-display', t.headingFont);
+      r.setAttribute('data-acc', t.accessibility ? 'on' : 'off');
+      r.setAttribute('data-voice', t.voice);
+    }, [t]);
+
+    return (
+      <TweaksPanel title="Tweaks">
+        <TweakSection label="Aspecto" />
+        <TweakToggle label="Modo nocturno" value={t.dark} onChange={(v) => setTweak('dark', v)} />
+        <TweakColor label="Acento" value={t.accent}
+          options={["oklch(0.68 0.115 50)", "oklch(0.68 0.085 140)", "oklch(0.68 0.065 240)", "#E8B07A"]}
+          onChange={(v) => setTweak('accent', v)} />
+        <TweakSelect label="Tipografía de titulares" value={t.headingFont}
+          options={[
+            { label: "Space Grotesk", value: "\"Space Grotesk\", system-ui, sans-serif" },
+            { label: "Hanken Grotesk", value: "\"Hanken Grotesk\", system-ui, sans-serif" },
+            { label: "Cormorant (serif)", value: "\"Cormorant Garamond\", Georgia, serif" }
+          ]}
+          onChange={(v) => setTweak('headingFont', v)} />
+
+        <TweakSection label="Contenido" />
+        <TweakRadio label="Voz" value={t.voice}
+          options={[{ label: "Literaria", value: "lit" }, { label: "Directa", value: "plain" }]}
+          onChange={(v) => setTweak('voice', v)} />
+        <TweakToggle label="Detalle de accesibilidad" value={t.accessibility} onChange={(v) => setTweak('accessibility', v)} />
+      </TweaksPanel>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('tweaks-root')).render(<RaizTweaks />);
+</script>
+
+<!-- direct-edit style overrides -->
+<style id="__om-edit-overrides"></style>
+</body>
+</html>

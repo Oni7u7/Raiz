@@ -1,0 +1,61 @@
+/* Design tokens — extraídos literalmente de :root en raiz-v3.css
+   (la fuente de verdad es el sitio principal, alaraiz.mx). No
+   inventar valores nuevos aquí: si el sistema visual del sitio
+   cambia, este archivo se actualiza copiando de raiz-v3.css. */
+
+:root {
+  /* paper + ink — warm-dark editorial (first draft) */
+  --paper: #14110d;
+  --paper-2: #1b1711;
+  --paper-3: #241f17;
+  --ink: #ece7dd;
+  --ink-dim: #b3aa9b;
+  --ink-faint: #857c6f;
+  --rule: rgba(236, 231, 221, 0.14);
+  --rule-soft: rgba(236, 231, 221, 0.08);
+  --rule-hair: rgba(236, 231, 221, 0.05);
+
+  /* collection coding — clay · moss · slate */
+  --clay: oklch(0.7 0.12 50);
+  --moss: oklch(0.7 0.085 140);
+  --slate: oklch(0.7 0.07 240);
+  --brasa: oklch(0.66 0.155 42); /* Détente · ember (family accent) */
+
+  /* primary accent (tweakable) — clay */
+  --accent: oklch(0.7 0.12 50);
+  --accent-ink: #16120c;
+
+  /* type — geometric "Geo" system */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Hanken Grotesk', system-ui, sans-serif;
+  --font-mono: 'Space Grotesk', ui-monospace, monospace;
+
+  --r-sm: 6px;
+  --r-md: 12px;
+  --r-lg: 18px;
+  --r-pill: 999px;
+  --shadow: 0 28px 60px -36px rgba(0, 0, 0, 0.8);
+
+  --maxw: 1280px;
+  --gut: clamp(20px, 5vw, 72px);
+}
+
+/* ---- light theme (alternate) ---- */
+:root[data-theme='light'] {
+  --paper: #ece6d5;
+  --paper-2: #f5f1e5;
+  --paper-3: #e1d9c5;
+  --ink: #2a2a1d;
+  --ink-dim: #5e5a47;
+  --ink-faint: #8f8975;
+  --rule: rgba(42, 42, 29, 0.16);
+  --rule-soft: rgba(42, 42, 29, 0.09);
+  --rule-hair: rgba(42, 42, 29, 0.05);
+  --clay: #9c4f30;
+  --moss: #4f6a3a;
+  --slate: #8a6a2e;
+  --brasa: #a8401f;
+  --accent: #9c4f30;
+  --accent-ink: #f5f1e5;
+  --shadow: 0 22px 48px -34px rgba(42, 42, 29, 0.5);
+}
