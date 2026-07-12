@@ -2,7 +2,19 @@ import { useEffect, useState, type FormEvent } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { supabase } from '../../lib/supabaseClient'
 import { useAuth } from '../../context/AuthContext'
+import { AddressAutocompleteField } from '../../components/AddressAutocompleteField'
 import type { EventStatus } from '../../types/database'
+
+const ACCESSIBILITY_OPTIONS = [
+  'Camino plano / sin escalones',
+  'Terreno irregular',
+  'Rampas disponibles',
+  'Baños accesibles',
+  'Apoyo para visión (baja visión/ciegos)',
+  'Apoyo para audición (sordera/hipoacusia)',
+  'Asientos disponibles',
+  'Estacionamiento accesible',
+]
 
 function toDatetimeLocal(iso: string | null) {
   if (!iso) return ''
@@ -21,11 +33,15 @@ export function EventForm() {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [location, setLocation] = useState('')
+  const [latitude, setLatitude] = useState<number | null>(null)
+  const [longitude, setLongitude] = useState<number | null>(null)
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
   const [capacity, setCapacity] = useState('')
   const [price, setPrice] = useState('')
-  const [accessibilityFeatures, setAccessibilityFeatures] = useState('')
+  const [selectedAccessibility, setSelectedAccessibility] = useState<Set<string>>(new Set())
+  const [otroChecked, setOtroChecked] = useState(false)
+  const [otroText, setOtroText] = useState('')
   const [status, setStatus] = useState<EventStatus>('borrador')
 
   const [loading, setLoading] = useState(isEditing)
@@ -51,11 +67,21 @@ export function EventForm() {
         setTitle(data.title)
         setDescription(data.description ?? '')
         setLocation(data.location ?? '')
+        setLatitude(data.latitude)
+        setLongitude(data.longitude)
         setStartDate(toDatetimeLocal(data.start_date))
         setEndDate(toDatetimeLocal(data.end_date))
         setCapacity(data.capacity != null ? String(data.capacity) : '')
         setPrice(data.price != null ? String(data.price) : '')
-        setAccessibilityFeatures(data.accessibility_features.join(', '))
+
+        const matched = new Set(data.accessibility_features.filter((f) => ACCESSIBILITY_OPTIONS.includes(f)))
+        const leftover = data.accessibility_features.filter((f) => !ACCESSIBILITY_OPTIONS.includes(f))
+        setSelectedAccessibility(matched)
+        if (leftover.length > 0) {
+          setOtroChecked(true)
+          setOtroText(leftover.join(', '))
+        }
+
         setStatus(data.status)
         setLoading(false)
       })
@@ -65,23 +91,36 @@ export function EventForm() {
     }
   }, [id, isEditing])
 
+  function toggleAccessibility(option: string) {
+    setSelectedAccessibility((prev) => {
+      const next = new Set(prev)
+      if (next.has(option)) next.delete(option)
+      else next.add(option)
+      return next
+    })
+  }
+
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     setError(null)
     setSubmitting(true)
 
+    const accessibilityFeatures = [
+      ...selectedAccessibility,
+      ...(otroChecked && otroText.trim() ? [otroText.trim()] : []),
+    ]
+
     const payload = {
       title,
       description: description || null,
       location: location || null,
+      latitude,
+      longitude,
       start_date: new Date(startDate).toISOString(),
       end_date: endDate ? new Date(endDate).toISOString() : null,
       capacity: capacity ? Number(capacity) : null,
       price: price ? Number(price) : null,
-      accessibility_features: accessibilityFeatures
-        .split(',')
-        .map((f) => f.trim())
-        .filter(Boolean),
+      accessibility_features: accessibilityFeatures,
       status,
     }
 
@@ -119,8 +158,17 @@ export function EventForm() {
             />
           </div>
           <div className="field">
-            <label htmlFor="location">Lugar</label>
-            <input id="location" value={location} onChange={(e) => setLocation(e.target.value)} />
+            <label htmlFor="location">Dirección</label>
+            <AddressAutocompleteField
+              value={location}
+              latitude={latitude}
+              longitude={longitude}
+              onChange={(next) => {
+                setLocation(next.address)
+                setLatitude(next.latitude)
+                setLongitude(next.longitude)
+              }}
+            />
           </div>
           <div className="field row2">
             <div>
@@ -167,14 +215,35 @@ export function EventForm() {
             </div>
           </div>
           <div className="field">
-            <label htmlFor="accessibilityFeatures">
-              Accesibilidad (separado por comas: rampa, baño adaptado, señas)
-            </label>
-            <input
-              id="accessibilityFeatures"
-              value={accessibilityFeatures}
-              onChange={(e) => setAccessibilityFeatures(e.target.value)}
-            />
+            <label>Accesibilidad</label>
+            <div className="field-checkboxes">
+              {ACCESSIBILITY_OPTIONS.map((option) => (
+                <label key={option} className="checkbox-option">
+                  <input
+                    type="checkbox"
+                    checked={selectedAccessibility.has(option)}
+                    onChange={() => toggleAccessibility(option)}
+                  />
+                  {option}
+                </label>
+              ))}
+              <label className="checkbox-option">
+                <input
+                  type="checkbox"
+                  checked={otroChecked}
+                  onChange={(e) => setOtroChecked(e.target.checked)}
+                />
+                Otro
+              </label>
+              {otroChecked && (
+                <input
+                  className="checkbox-option-detail"
+                  placeholder="Detalla la accesibilidad adicional"
+                  value={otroText}
+                  onChange={(e) => setOtroText(e.target.value)}
+                />
+              )}
+            </div>
           </div>
           <div className="field">
             <label htmlFor="status">Estado</label>

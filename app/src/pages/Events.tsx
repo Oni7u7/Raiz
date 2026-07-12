@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
+import { googleMapsSearchUrl } from '../lib/googleMapsUrl'
 import type { Database } from '../types/database'
 
 type EventRow = Database['public']['Tables']['events']['Row'] & {
@@ -45,18 +46,35 @@ export function Events() {
       <h1>Eventos</h1>
       {events.length === 0 && <p>No hay eventos publicados por ahora.</p>}
       <ul className="events-list">
-        {events.map((event) => (
-          <li key={event.id}>
-            <Link to={`/eventos/${event.id}`}>
-              <h2>{event.title}</h2>
-              <p>
-                {new Date(event.start_date).toLocaleString('es-MX')}
-                {event.location ? ` · ${event.location}` : ''}
-              </p>
-              {event.hosts?.business_name && <p className="host-name">{event.hosts.business_name}</p>}
-            </Link>
-          </li>
-        ))}
+        {events.map((event) => {
+          const mapsUrl = googleMapsSearchUrl(event.location, event.latitude, event.longitude)
+          return (
+            <li key={event.id}>
+              <Link to={`/eventos/${event.id}`} className="card-link">
+                <h2>{event.title}</h2>
+                <p>
+                  {new Date(event.start_date).toLocaleString('es-MX')}
+                  {event.location ? ` · ${event.location}` : ''}
+                </p>
+                {event.hosts?.business_name && <p className="host-name">{event.hosts.business_name}</p>}
+                {event.accessibility_features.length > 0 && (
+                  <div className="chips">
+                    {event.accessibility_features.map((f) => (
+                      <span key={f} className="chip">
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </Link>
+              {mapsUrl && (
+                <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="map-link">
+                  Ver en Google Maps →
+                </a>
+              )}
+            </li>
+          )
+        })}
       </ul>
     </div>
   )
