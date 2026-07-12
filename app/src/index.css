@@ -624,6 +624,38 @@ hr {
   font-size: 0.62rem;
 }
 
+.verified-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  border: 1px solid var(--moss);
+  color: var(--moss);
+  font-size: 0.65rem;
+  font-weight: 700;
+  flex: none;
+}
+
+.review-form {
+  flex-basis: 100%;
+  margin-top: 0.5rem;
+  max-width: 420px;
+}
+
+.review-form-actions {
+  display: flex;
+  gap: 0.7rem;
+  margin-top: 0.5rem;
+}
+
+.review-done {
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+  margin-left: auto;
+}
+
 .restrictions-catalog {
   padding-top: 0.4rem;
 }
