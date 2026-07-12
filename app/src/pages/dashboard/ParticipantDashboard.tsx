@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { supabase } from '../../lib/supabaseClient'
 import { useAuth } from '../../context/AuthContext'
 import type { Database } from '../../types/database'
+import { ChatWidget, type SuggestedAction } from '../../components/ChatWidget'
 
 type BookingRow = Database['public']['Tables']['bookings']['Row'] & {
   events: Database['public']['Tables']['events']['Row'] | null
@@ -141,6 +142,12 @@ export function ParticipantDashboard() {
     await loadAll()
   }
 
+  async function handleSuggestedAction(action: SuggestedAction) {
+    if (action.type === 'add_restriction') {
+      await toggleRestriction(action.restriction_id, true)
+    }
+  }
+
   if (loading) return <p className="loading">Cargando…</p>
 
   const myRestrictionIds = new Set(myRestrictions.map((r) => r.restriction_id))
@@ -258,6 +265,8 @@ export function ParticipantDashboard() {
           ))}
         </div>
       </section>
+
+      <ChatWidget role="participante" onConfirmAction={handleSuggestedAction} />
     </div>
   )
 }

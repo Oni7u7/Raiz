@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { supabase } from '../../lib/supabaseClient'
 import { useAuth } from '../../context/AuthContext'
 import type { BookingStatus, Database } from '../../types/database'
+import { ChatWidget } from '../../components/ChatWidget'
 
 type EventRow = Database['public']['Tables']['events']['Row']
 type BookingRow = Database['public']['Tables']['bookings']['Row']
@@ -189,6 +190,8 @@ export function HostDashboard() {
           })}
         </ul>
       </section>
+
+      <ChatWidget role="anfitrion" />
     </div>
   )
 }
