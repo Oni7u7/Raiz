@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 import { googleMapsSearchUrl } from '../lib/googleMapsUrl'
+import { useLanguage } from '../context/LanguageContext'
+import { accessibilityLabel } from '../i18n/labels'
 import type { Database } from '../types/database'
 
 type EventRow = Database['public']['Tables']['events']['Row'] & {
@@ -9,6 +11,7 @@ type EventRow = Database['public']['Tables']['events']['Row'] & {
 }
 
 export function Events() {
+  const { t, language } = useLanguage()
   const [events, setEvents] = useState<EventRow[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -38,13 +41,13 @@ export function Events() {
     }
   }, [])
 
-  if (loading) return <p className="loading">Cargando eventos…</p>
+  if (loading) return <p className="loading">{t.events.loading}</p>
   if (error) return <p className="form-error">{error}</p>
 
   return (
     <div className="events-page">
-      <h1>Eventos</h1>
-      {events.length === 0 && <p>No hay eventos publicados por ahora.</p>}
+      <h1>{t.events.title}</h1>
+      {events.length === 0 && <p>{t.events.empty}</p>}
       <ul className="events-list">
         {events.map((event) => {
           const mapsUrl = googleMapsSearchUrl(event.location, event.latitude, event.longitude)
@@ -53,7 +56,7 @@ export function Events() {
               <Link to={`/eventos/${event.id}`} className="card-link">
                 <h2>{event.title}</h2>
                 <p>
-                  {new Date(event.start_date).toLocaleString('es-MX')}
+                  {new Date(event.start_date).toLocaleString(language === 'en' ? 'en-US' : 'es-MX')}
                   {event.location ? ` · ${event.location}` : ''}
                 </p>
                 {event.hosts?.business_name && <p className="host-name">{event.hosts.business_name}</p>}
@@ -61,7 +64,7 @@ export function Events() {
                   <div className="chips">
                     {event.accessibility_features.map((f) => (
                       <span key={f} className="chip">
-                        {f}
+                        {accessibilityLabel(f, language)}
                       </span>
                     ))}
                   </div>
@@ -69,7 +72,7 @@ export function Events() {
               </Link>
               {mapsUrl && (
                 <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="map-link">
-                  Ver en Google Maps →
+                  {t.common.viewOnMaps}
                 </a>
               )}
             </li>

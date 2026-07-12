@@ -1,9 +1,11 @@
 import { useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
+import { useLanguage } from '../context/LanguageContext'
 import type { UserRole } from '../types/database'
 
 export function Register() {
+  const { t } = useLanguage()
   const [role, setRole] = useState<UserRole>('participante')
   const [fullName, setFullName] = useState('')
   const [phone, setPhone] = useState('')
@@ -65,12 +67,12 @@ export function Register() {
         <div className="auth-page">
           <div className="form-card">
             <span className="kicker">Raíz</span>
-            <h1>Revisa tu correo</h1>
+            <h1>{t.register.confirmTitle}</h1>
             <p>
-              Te mandamos un enlace de confirmación a <strong>{email}</strong>. Confírmalo y luego
-              inicia sesión.
+              {t.register.confirmBodyPre} <strong>{email}</strong>
+              {t.register.confirmBodyPost}
             </p>
-            <Link to="/login">Ir a iniciar sesión</Link>
+            <Link to="/login">{t.register.goLogin}</Link>
           </div>
         </div>
       </div>
@@ -85,10 +87,10 @@ export function Register() {
       <div className="auth-page">
         <div className="form-card">
           <span className="kicker">Raíz</span>
-          <h1>Crear cuenta</h1>
+          <h1>{t.register.title}</h1>
           <form onSubmit={handleSubmit}>
             <div className="field">
-              <label>Soy…</label>
+              <label>{t.register.roleLabel}</label>
               <div className="field-radios">
                 <label>
                   <input
@@ -97,7 +99,7 @@ export function Register() {
                     checked={role === 'participante'}
                     onChange={() => setRole('participante')}
                   />
-                  Participante
+                  {t.register.roleParticipant}
                 </label>
                 <label>
                   <input
@@ -106,13 +108,13 @@ export function Register() {
                     checked={role === 'anfitrion'}
                     onChange={() => setRole('anfitrion')}
                   />
-                  Anfitrión
+                  {t.register.roleHost}
                 </label>
               </div>
             </div>
 
             <div className="field">
-              <label htmlFor="fullName">Nombre completo</label>
+              <label htmlFor="fullName">{t.register.fullNameLabel}</label>
               <input
                 id="fullName"
                 required
@@ -121,11 +123,11 @@ export function Register() {
               />
             </div>
             <div className="field">
-              <label htmlFor="phone">Teléfono</label>
+              <label htmlFor="phone">{t.register.phoneLabel}</label>
               <input id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
             </div>
             <div className="field">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">{t.register.emailLabel}</label>
               <input
                 id="email"
                 type="email"
@@ -135,7 +137,7 @@ export function Register() {
               />
             </div>
             <div className="field">
-              <label htmlFor="password">Contraseña</label>
+              <label htmlFor="password">{t.register.passwordLabel}</label>
               <input
                 id="password"
                 type="password"
@@ -149,7 +151,7 @@ export function Register() {
             {role === 'anfitrion' ? (
               <>
                 <div className="field">
-                  <label htmlFor="businessName">Nombre del negocio</label>
+                  <label htmlFor="businessName">{t.register.businessNameLabel}</label>
                   <input
                     id="businessName"
                     value={businessName}
@@ -157,14 +159,14 @@ export function Register() {
                   />
                 </div>
                 <div className="field">
-                  <label htmlFor="bio">Bio</label>
+                  <label htmlFor="bio">{t.register.bioLabel}</label>
                   <textarea id="bio" value={bio} onChange={(e) => setBio(e.target.value)} />
                 </div>
               </>
             ) : (
               <>
                 <div className="field">
-                  <label htmlFor="ecName">Contacto de emergencia — nombre</label>
+                  <label htmlFor="ecName">{t.register.ecNameLabel}</label>
                   <input
                     id="ecName"
                     value={emergencyContactName}
@@ -172,7 +174,7 @@ export function Register() {
                   />
                 </div>
                 <div className="field">
-                  <label htmlFor="ecPhone">Contacto de emergencia — teléfono</label>
+                  <label htmlFor="ecPhone">{t.register.ecPhoneLabel}</label>
                   <input
                     id="ecPhone"
                     value={emergencyContactPhone}
@@ -184,11 +186,12 @@ export function Register() {
 
             {error && <p className="form-error">{error}</p>}
             <button type="submit" className="btn btn-solid" disabled={submitting}>
-              {submitting ? 'Creando cuenta…' : 'Crear cuenta'}
+              {submitting ? t.register.submitting : t.register.submit}
             </button>
           </form>
           <p>
-            ¿Ya tienes cuenta? <Link to="/login">Inicia sesión</Link>
+            {t.register.haveAccount}
+            <Link to="/login">{t.register.loginLink}</Link>
           </p>
         </div>
       </div>

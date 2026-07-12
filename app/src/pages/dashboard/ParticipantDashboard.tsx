@@ -2,8 +2,11 @@ import { useEffect, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../../lib/supabaseClient'
 import { useAuth } from '../../context/AuthContext'
+import { useLanguage } from '../../context/LanguageContext'
+import { BOOKING_STATUS_LABELS, RESTRICTION_TYPE_LABELS } from '../../i18n/labels'
 import type { Database } from '../../types/database'
 import { ChatWidget, type SuggestedAction } from '../../components/ChatWidget'
+import { RootsBackground } from '../../components/RootsBackground'
 
 type BookingRow = Database['public']['Tables']['bookings']['Row'] & {
   events: Database['public']['Tables']['events']['Row'] | null
@@ -16,6 +19,7 @@ type ParticipantRestrictionRow = Database['public']['Tables']['participant_restr
 
 export function ParticipantDashboard() {
   const { session } = useAuth()
+  const { t, language } = useLanguage()
   const participantId = session!.user.id
 
   const [bookings, setBookings] = useState<BookingRow[]>([])
@@ -131,7 +135,7 @@ export function ParticipantDashboard() {
 
     if (error) {
       if (error.code === '23505') {
-        setReviewError('Ya dejaste una reseña para este evento.')
+        setReviewError(t.participantDashboard.duplicateReview)
       } else {
         setReviewError(error.message)
       }
@@ -148,16 +152,17 @@ export function ParticipantDashboard() {
     }
   }
 
-  if (loading) return <p className="loading">Cargando…</p>
+  if (loading) return <p className="loading">{t.common.loading}</p>
 
   const myRestrictionIds = new Set(myRestrictions.map((r) => r.restriction_id))
 
   return (
     <div className="dashboard">
+      <RootsBackground />
       <div className="masthead">
         <div className="mh-l">
-          <span className="kicker">Participante</span>
-          <h1>Mi dashboard</h1>
+          <span className="kicker">{t.participantDashboard.kicker}</span>
+          <h1>{t.participantDashboard.title}</h1>
         </div>
       </div>
       {error && <p className="form-error">{error}</p>}
@@ -165,13 +170,14 @@ export function ParticipantDashboard() {
       <section>
         <div className="masthead">
           <div className="mh-l">
-            <span className="kicker">Inscripciones</span>
-            <h2>Mis reservas</h2>
+            <span className="kicker">{t.participantDashboard.bookingsKicker}</span>
+            <h2>{t.participantDashboard.bookingsTitle}</h2>
           </div>
         </div>
         {bookings.length === 0 && (
           <p>
-            Aún no tienes reservas. <Link to="/eventos">Ver eventos</Link>
+            {t.participantDashboard.noBookingsPre}
+            <Link to="/eventos">{t.participantDashboard.viewEvents}</Link>
           </p>
         )}
         <ul>
@@ -182,33 +188,29 @@ export function ParticipantDashboard() {
 
             return (
               <li key={b.id}>
-                <strong>{b.events?.title ?? 'Evento eliminado'}</strong>
+                <strong>{b.events?.title ?? t.participantDashboard.deletedEvent}</strong>
                 {' — '}
-                {b.events && new Date(b.events.start_date).toLocaleString('es-MX')}
-                {' — estado: '}
-                <span className={`status status-${b.status}`}>{b.status}</span>
+                {b.events && new Date(b.events.start_date).toLocaleString(language === 'en' ? 'en-US' : 'es-MX')}
+                {t.participantDashboard.statusPrefix}
+                <span className={`status status-${b.status}`}>{BOOKING_STATUS_LABELS[b.status][language]}</span>
                 {b.status !== 'cancelado' && (
                   <button type="button" className="btn" onClick={() => cancelBooking(b.id)}>
-                    Cancelar
+                    {t.participantDashboard.cancel}
                   </button>
                 )}
-                {b.status === 'en_espera' && (
-                  <p className="waitlist-note">
-                    Estás en lista de espera — te avisaremos si se libera un lugar.
-                  </p>
-                )}
+                {b.status === 'en_espera' && <p className="waitlist-note">{t.participantDashboard.waitlistNote}</p>}
                 {showReviewButton && !showReviewForm && (
                   <button type="button" className="btn" onClick={() => openReviewForm(b.id)}>
-                    Dejar reseña
+                    {t.participantDashboard.reviewBtn}
                   </button>
                 )}
                 {b.status === 'asistio' && alreadyReviewed && (
-                  <span className="review-done">Ya dejaste tu reseña ✓</span>
+                  <span className="review-done">{t.participantDashboard.reviewDone}</span>
                 )}
                 {showReviewForm && (
                   <form className="review-form" onSubmit={(e) => submitReview(e, b)}>
                     <div className="field">
-                      <label htmlFor={`rating-${b.id}`}>Calificación</label>
+                      <label htmlFor={`rating-${b.id}`}>{t.participantDashboard.ratingLabel}</label>
                       <select
                         id={`rating-${b.id}`}
                         value={reviewRating}
@@ -222,7 +224,7 @@ export function ParticipantDashboard() {
                       </select>
                     </div>
                     <div className="field">
-                      <label htmlFor={`comment-${b.id}`}>Comentario (opcional)</label>
+                      <label htmlFor={`comment-${b.id}`}>{t.participantDashboard.commentLabel}</label>
                       <textarea
                         id={`comment-${b.id}`}
                         value={reviewComment}
@@ -232,10 +234,10 @@ export function ParticipantDashboard() {
                     {reviewError && <p className="form-error">{reviewError}</p>}
                     <div className="review-form-actions">
                       <button type="submit" className="btn btn-solid" disabled={reviewSubmitting}>
-                        {reviewSubmitting ? 'Enviando…' : 'Enviar reseña'}
+                        {reviewSubmitting ? t.participantDashboard.reviewSubmitting : t.participantDashboard.reviewSubmit}
                       </button>
                       <button type="button" className="btn" onClick={closeReviewForm}>
-                        Cancelar
+                        {t.participantDashboard.reviewCancel}
                       </button>
                     </div>
                   </form>
@@ -249,12 +251,12 @@ export function ParticipantDashboard() {
       <section>
         <div className="masthead">
           <div className="mh-l">
-            <span className="kicker">Perfil</span>
-            <h2>Mis restricciones</h2>
+            <span className="kicker">{t.participantDashboard.restrictionsKicker}</span>
+            <h2>{t.participantDashboard.restrictionsTitle}</h2>
           </div>
         </div>
         <p className="lede" style={{ marginBottom: '1rem' }}>
-          Marca las que apliquen (dietéticas, médicas, de accesibilidad).
+          {t.participantDashboard.restrictionsLede}
         </p>
         <div className="chips restrictions-catalog">
           {catalog.map((r) => (
@@ -265,7 +267,7 @@ export function ParticipantDashboard() {
               aria-pressed={myRestrictionIds.has(r.id)}
               onClick={() => toggleRestriction(r.id, !myRestrictionIds.has(r.id))}
             >
-              {r.name} <span className="restriction-type">{r.type}</span>
+              {r.name} <span className="restriction-type">{RESTRICTION_TYPE_LABELS[r.type][language]}</span>
             </button>
           ))}
         </div>

@@ -2,7 +2,10 @@ import { useEffect, useState, type FormEvent } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { supabase } from '../../lib/supabaseClient'
 import { useAuth } from '../../context/AuthContext'
+import { useLanguage } from '../../context/LanguageContext'
 import { AddressAutocompleteField } from '../../components/AddressAutocompleteField'
+import { RootsBackground } from '../../components/RootsBackground'
+import { EVENT_STATUS_LABELS, accessibilityLabel } from '../../i18n/labels'
 import type { EventStatus } from '../../types/database'
 
 const ACCESSIBILITY_OPTIONS = [
@@ -16,6 +19,8 @@ const ACCESSIBILITY_OPTIONS = [
   'Estacionamiento accesible',
 ]
 
+const EVENT_STATUSES: EventStatus[] = ['borrador', 'publicado', 'cancelado', 'finalizado']
+
 function toDatetimeLocal(iso: string | null) {
   if (!iso) return ''
   const d = new Date(iso)
@@ -28,6 +33,7 @@ export function EventForm() {
   const isEditing = Boolean(id)
   const navigate = useNavigate()
   const { session } = useAuth()
+  const { t, language } = useLanguage()
   const hostId = session!.user.id
 
   const [title, setTitle] = useState('')
@@ -60,7 +66,7 @@ export function EventForm() {
       .then(({ data, error }) => {
         if (!active) return
         if (error || !data) {
-          setError(error?.message ?? 'Evento no encontrado')
+          setError(error?.message ?? t.eventDetail.notFound)
           setLoading(false)
           return
         }
@@ -138,19 +144,20 @@ export function EventForm() {
     navigate('/dashboard/anfitrion')
   }
 
-  if (loading) return <p className="loading">Cargando…</p>
+  if (loading) return <p className="loading">{t.common.loading}</p>
 
   return (
     <div className="event-form-page">
+      <RootsBackground />
       <div className="form-card">
-        <h1>{isEditing ? 'Editar evento' : 'Nuevo evento'}</h1>
+        <h1>{isEditing ? t.eventForm.titleEdit : t.eventForm.titleNew}</h1>
         <form onSubmit={handleSubmit}>
           <div className="field">
-            <label htmlFor="title">Título</label>
+            <label htmlFor="title">{t.eventForm.titleLabel}</label>
             <input id="title" required value={title} onChange={(e) => setTitle(e.target.value)} />
           </div>
           <div className="field">
-            <label htmlFor="description">Descripción</label>
+            <label htmlFor="description">{t.eventForm.descriptionLabel}</label>
             <textarea
               id="description"
               value={description}
@@ -158,7 +165,7 @@ export function EventForm() {
             />
           </div>
           <div className="field">
-            <label htmlFor="location">Dirección</label>
+            <label htmlFor="location">{t.eventForm.addressLabel}</label>
             <AddressAutocompleteField
               value={location}
               latitude={latitude}
@@ -172,7 +179,7 @@ export function EventForm() {
           </div>
           <div className="field row2">
             <div>
-              <label htmlFor="startDate">Fecha y hora de inicio</label>
+              <label htmlFor="startDate">{t.eventForm.startDateLabel}</label>
               <input
                 id="startDate"
                 type="datetime-local"
@@ -182,7 +189,7 @@ export function EventForm() {
               />
             </div>
             <div>
-              <label htmlFor="endDate">Fecha y hora de fin</label>
+              <label htmlFor="endDate">{t.eventForm.endDateLabel}</label>
               <input
                 id="endDate"
                 type="datetime-local"
@@ -193,7 +200,7 @@ export function EventForm() {
           </div>
           <div className="field row2">
             <div>
-              <label htmlFor="capacity">Cupo</label>
+              <label htmlFor="capacity">{t.eventForm.capacityLabel}</label>
               <input
                 id="capacity"
                 type="number"
@@ -203,7 +210,7 @@ export function EventForm() {
               />
             </div>
             <div>
-              <label htmlFor="price">Precio</label>
+              <label htmlFor="price">{t.eventForm.priceLabel}</label>
               <input
                 id="price"
                 type="number"
@@ -215,7 +222,7 @@ export function EventForm() {
             </div>
           </div>
           <div className="field">
-            <label>Accesibilidad</label>
+            <label>{t.eventForm.accessibilityLabel}</label>
             <div className="field-checkboxes">
               {ACCESSIBILITY_OPTIONS.map((option) => (
                 <label key={option} className="checkbox-option">
@@ -224,7 +231,7 @@ export function EventForm() {
                     checked={selectedAccessibility.has(option)}
                     onChange={() => toggleAccessibility(option)}
                   />
-                  {option}
+                  {accessibilityLabel(option, language)}
                 </label>
               ))}
               <label className="checkbox-option">
@@ -233,12 +240,12 @@ export function EventForm() {
                   checked={otroChecked}
                   onChange={(e) => setOtroChecked(e.target.checked)}
                 />
-                Otro
+                {t.eventForm.otroLabel}
               </label>
               {otroChecked && (
                 <input
                   className="checkbox-option-detail"
-                  placeholder="Detalla la accesibilidad adicional"
+                  placeholder={t.eventForm.otroPlaceholder}
                   value={otroText}
                   onChange={(e) => setOtroText(e.target.value)}
                 />
@@ -246,22 +253,23 @@ export function EventForm() {
             </div>
           </div>
           <div className="field">
-            <label htmlFor="status">Estado</label>
+            <label htmlFor="status">{t.eventForm.statusLabel}</label>
             <select
               id="status"
               value={status}
               onChange={(e) => setStatus(e.target.value as EventStatus)}
             >
-              <option value="borrador">Borrador</option>
-              <option value="publicado">Publicado</option>
-              <option value="cancelado">Cancelado</option>
-              <option value="finalizado">Finalizado</option>
+              {EVENT_STATUSES.map((s) => (
+                <option key={s} value={s}>
+                  {EVENT_STATUS_LABELS[s][language]}
+                </option>
+              ))}
             </select>
           </div>
 
           {error && <p className="form-error">{error}</p>}
           <button type="submit" className="btn btn-solid" disabled={submitting}>
-            {submitting ? 'Guardando…' : 'Guardar'}
+            {submitting ? t.eventForm.saving : t.eventForm.save}
           </button>
         </form>
       </div>

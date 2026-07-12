@@ -1,9 +1,11 @@
 import { useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
+import { useLanguage } from '../context/LanguageContext'
 
 export function Login() {
   const navigate = useNavigate()
+  const { t } = useLanguage()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -40,10 +42,10 @@ export function Login() {
       <div className="auth-page">
         <div className="form-card">
           <span className="kicker">Raíz</span>
-          <h1>Iniciar sesión</h1>
+          <h1>{t.login.title}</h1>
           <form onSubmit={handleSubmit}>
             <div className="field">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">{t.login.emailLabel}</label>
               <input
                 id="email"
                 type="email"
@@ -53,7 +55,7 @@ export function Login() {
               />
             </div>
             <div className="field">
-              <label htmlFor="password">Contraseña</label>
+              <label htmlFor="password">{t.login.passwordLabel}</label>
               <input
                 id="password"
                 type="password"
@@ -64,11 +66,12 @@ export function Login() {
             </div>
             {error && <p className="form-error">{error}</p>}
             <button type="submit" className="btn btn-solid" disabled={submitting}>
-              {submitting ? 'Entrando…' : 'Entrar'}
+              {submitting ? t.login.submitting : t.login.submit}
             </button>
           </form>
           <p>
-            ¿No tienes cuenta? <Link to="/registro">Regístrate</Link>
+            {t.login.noAccount}
+            <Link to="/registro">{t.login.registerLink}</Link>
           </p>
         </div>
       </div>

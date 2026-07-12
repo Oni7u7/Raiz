@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../../lib/supabaseClient'
 import { useAuth } from '../../context/AuthContext'
+import { useLanguage } from '../../context/LanguageContext'
+import { BOOKING_STATUS_LABELS, EVENT_STATUS_LABELS } from '../../i18n/labels'
 import type { BookingStatus, Database } from '../../types/database'
 import { ChatWidget } from '../../components/ChatWidget'
+import { RootsBackground } from '../../components/RootsBackground'
 
 type EventRow = Database['public']['Tables']['events']['Row']
 type BookingRow = Database['public']['Tables']['bookings']['Row']
@@ -21,6 +24,7 @@ const BOOKING_STATUSES: BookingStatus[] = [
 
 export function HostDashboard() {
   const { session } = useAuth()
+  const { t, language } = useLanguage()
   const hostId = session!.user.id
 
   const [events, setEvents] = useState<EventRow[]>([])
@@ -116,32 +120,33 @@ export function HostDashboard() {
     })
   }
 
-  if (loading) return <p className="loading">Cargando…</p>
+  if (loading) return <p className="loading">{t.common.loading}</p>
 
   return (
     <div className="dashboard">
+      <RootsBackground />
       <div className="masthead">
         <div className="mh-l">
-          <span className="kicker">Anfitrión</span>
-          <h1>Mi dashboard</h1>
+          <span className="kicker">{t.hostDashboard.kicker}</span>
+          <h1>{t.hostDashboard.title}</h1>
         </div>
       </div>
       {error && <p className="form-error">{error}</p>}
 
       <div className="dashboard-actions">
         <Link to="/dashboard/anfitrion/eventos/nuevo" className="btn btn-solid">
-          + Nuevo evento
+          {t.hostDashboard.newEvent}
         </Link>
       </div>
 
       <section>
         <div className="masthead">
           <div className="mh-l">
-            <span className="kicker">Publicaciones</span>
-            <h2>Mis eventos</h2>
+            <span className="kicker">{t.hostDashboard.publicationsKicker}</span>
+            <h2>{t.hostDashboard.myEventsTitle}</h2>
           </div>
         </div>
-        {events.length === 0 && <p>Aún no has publicado eventos.</p>}
+        {events.length === 0 && <p>{t.hostDashboard.noEvents}</p>}
         {events.map((event) => {
           const eventReviews = reviewsByEvent[event.id] ?? []
           const isFinalizado = event.status === 'finalizado'
@@ -151,10 +156,10 @@ export function HostDashboard() {
             <article key={event.id} className="host-event-card">
               <header>
                 <h3>{event.title}</h3>
-                <span className={`status status-${event.status}`}>{event.status}</span>
-                <Link to={`/dashboard/anfitrion/eventos/${event.id}/editar`}>Editar</Link>
+                <span className={`status status-${event.status}`}>{EVENT_STATUS_LABELS[event.status][language]}</span>
+                <Link to={`/dashboard/anfitrion/eventos/${event.id}/editar`}>{t.hostDashboard.edit}</Link>
               </header>
-              <p>{new Date(event.start_date).toLocaleString('es-MX')}</p>
+              <p>{new Date(event.start_date).toLocaleString(language === 'en' ? 'en-US' : 'es-MX')}</p>
 
               {isFinalizado && (
                 <button
@@ -162,21 +167,21 @@ export function HostDashboard() {
                   className="btn host-event-toggle"
                   onClick={() => toggleExpanded(event.id)}
                 >
-                  {isExpanded ? 'Ocultar ▴' : 'Ver reservas y reviews ▾'}
+                  {isExpanded ? t.hostDashboard.hide : t.hostDashboard.showDetails}
                 </button>
               )}
 
               {isExpanded && (
                 <>
                   <div className="host-event-subsection">
-                    <h4>Reservas</h4>
+                    <h4>{t.hostDashboard.reservationsTitle}</h4>
                     <ul>
-                      {(bookingsByEvent[event.id] ?? []).length === 0 && <li>Sin reservas.</li>}
+                      {(bookingsByEvent[event.id] ?? []).length === 0 && <li>{t.hostDashboard.noReservations}</li>}
                       {(bookingsByEvent[event.id] ?? []).map((b) => (
                         <li key={b.id}>
                           {b.form_data && typeof b.form_data === 'object' && 'notas' in b.form_data
-                            ? String((b.form_data as { notas?: string }).notas ?? '(sin notas)')
-                            : '(sin notas)'}
+                            ? String((b.form_data as { notas?: string }).notas ?? t.hostDashboard.noNotes)
+                            : t.hostDashboard.noNotes}
                           {' — '}
                           <select
                             value={b.status}
@@ -184,7 +189,7 @@ export function HostDashboard() {
                           >
                             {BOOKING_STATUSES.map((s) => (
                               <option key={s} value={s}>
-                                {s}
+                                {BOOKING_STATUS_LABELS[s][language]}
                               </option>
                             ))}
                           </select>
@@ -194,9 +199,9 @@ export function HostDashboard() {
                   </div>
 
                   <div className="host-event-subsection">
-                    <h4>Reviews</h4>
+                    <h4>{t.hostDashboard.reviewsTitle}</h4>
                     <ul>
-                      {eventReviews.length === 0 && <li>Sin reviews todavía.</li>}
+                      {eventReviews.length === 0 && <li>{t.hostDashboard.noReviews}</li>}
                       {eventReviews.map((r) => {
                         const anchor = anchorByReview[r.id]
                         return (
@@ -207,7 +212,7 @@ export function HostDashboard() {
                                 href={`https://sepolia.etherscan.io/tx/${anchor.tx_hash}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                title="Verificado en blockchain (Sepolia)"
+                                title={t.hostDashboard.verifiedTitle}
                                 className="verified-badge"
                               >
                                 ✓

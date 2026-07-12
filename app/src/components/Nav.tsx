@@ -1,8 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { useLanguage } from '../context/LanguageContext'
 
 export function Nav() {
   const { session, profile, signOut } = useAuth()
+  const { t, language, setLanguage } = useLanguage()
   const navigate = useNavigate()
 
   async function handleSignOut() {
@@ -16,24 +18,41 @@ export function Nav() {
         Raíz<span className="dot"></span>
       </Link>
       <div className="app-nav-links">
-        <Link to="/">Inicio </Link> 
-        <Link to="/eventos">Eventos</Link>
+        <Link to="/">{t.nav.inicio}</Link>
+        <Link to="/eventos">{t.nav.eventos}</Link>
         {session && profile?.role === 'participante' && (
-          <Link to="/dashboard/participante">Mi dashboard</Link>
+          <Link to="/dashboard/participante">{t.nav.dashboard}</Link>
         )}
         {session && profile?.role === 'anfitrion' && (
-          <Link to="/dashboard/anfitrion">Mi dashboard</Link>
+          <Link to="/dashboard/anfitrion">{t.nav.dashboard}</Link>
         )}
         {session ? (
           <button type="button" onClick={handleSignOut}>
-            Salir
+            {t.nav.salir}
           </button>
         ) : (
           <>
-            <Link to="/login">Entrar</Link>
-            <Link to="/registro">Registrarme</Link>
+            <Link to="/login">{t.nav.entrar}</Link>
+            <Link to="/registro">{t.nav.registrarme}</Link>
           </>
         )}
+        <div className="lang-toggle">
+          <button
+            type="button"
+            className={language === 'es' ? 'lang-active' : ''}
+            onClick={() => setLanguage('es')}
+          >
+            ES
+          </button>
+          <span>·</span>
+          <button
+            type="button"
+            className={language === 'en' ? 'lang-active' : ''}
+            onClick={() => setLanguage('en')}
+          >
+            EN
+          </button>
+        </div>
       </div>
     </nav>
   )

@@ -2,7 +2,9 @@ import { useEffect, useState, type FormEvent } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 import { useAuth } from '../context/AuthContext'
+import { useLanguage } from '../context/LanguageContext'
 import { googleMapsSearchUrl } from '../lib/googleMapsUrl'
+import { accessibilityLabel } from '../i18n/labels'
 import type { BookingStatus, Database } from '../types/database'
 
 type EventRow = Database['public']['Tables']['events']['Row'] & {
@@ -12,6 +14,7 @@ type EventRow = Database['public']['Tables']['events']['Row'] & {
 export function EventDetail() {
   const { id } = useParams<{ id: string }>()
   const { session, profile } = useAuth()
+  const { t, language } = useLanguage()
 
   const [event, setEvent] = useState<EventRow | null>(null)
   const [loading, setLoading] = useState(true)
@@ -66,7 +69,7 @@ export function EventDetail() {
 
     if (error) {
       if (error.code === '23505') {
-        setBookingError('Ya estás inscrito en este evento.')
+        setBookingError(t.eventDetail.alreadyBooked)
       } else {
         setBookingError(error.message)
       }
@@ -77,32 +80,40 @@ export function EventDetail() {
     setBookingDone(true)
   }
 
-  if (loading) return <p className="loading">Cargando…</p>
+  if (loading) return <p className="loading">{t.common.loading}</p>
   if (loadError) return <p className="form-error">{loadError}</p>
-  if (!event) return <p>Evento no encontrado.</p>
+  if (!event) return <p>{t.eventDetail.notFound}</p>
 
   const mapsUrl = googleMapsSearchUrl(event.location, event.latitude, event.longitude)
 
   return (
     <div className="event-detail">
       <h1>{event.title}</h1>
-      <p>{new Date(event.start_date).toLocaleString('es-MX')}</p>
+      <p>{new Date(event.start_date).toLocaleString(language === 'en' ? 'en-US' : 'es-MX')}</p>
       {event.location && <p>{event.location}</p>}
       {mapsUrl && (
         <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="map-link">
-          Ver en Google Maps →
+          {t.common.viewOnMaps}
         </a>
       )}
       {event.description && <p>{event.description}</p>}
-      {event.price != null && <p>Precio: ${event.price}</p>}
-      {event.capacity != null && <p>Cupo: {event.capacity}</p>}
+      {event.price != null && (
+        <p>
+          {t.eventDetail.price}: ${event.price}
+        </p>
+      )}
+      {event.capacity != null && (
+        <p>
+          {t.eventDetail.capacity}: {event.capacity}
+        </p>
+      )}
       {event.accessibility_features.length > 0 && (
         <div className="event-detail-accessibility">
-          <span className="kicker">Accesibilidad</span>
+          <span className="kicker">{t.eventDetail.accessibility}</span>
           <div className="chips">
             {event.accessibility_features.map((f) => (
               <span key={f} className="chip">
-                {f}
+                {accessibilityLabel(f, language)}
               </span>
             ))}
           </div>
@@ -119,39 +130,37 @@ export function EventDetail() {
 
       {!session && (
         <p>
-          <Link to="/login">Inicia sesión</Link> o <Link to="/registro">regístrate</Link> como
-          participante para reservar.
+          <Link to="/login">{t.eventDetail.loginLinkText}</Link>
+          {t.eventDetail.orText}
+          <Link to="/registro">{t.eventDetail.registerLinkText}</Link>
+          {t.eventDetail.loginSuffix}
         </p>
       )}
 
-      {session && profile && profile.role !== 'participante' && (
-        <p>Solo los participantes pueden reservar eventos.</p>
-      )}
+      {session && profile && profile.role !== 'participante' && <p>{t.eventDetail.onlyParticipants}</p>}
 
       {session && profile?.role === 'participante' && !bookingDone && (
         <form onSubmit={handleBooking}>
           <div className="field">
-            <label htmlFor="notes">Notas para el anfitrión (opcional)</label>
+            <label htmlFor="notes">{t.eventDetail.notesLabel}</label>
             <textarea id="notes" value={notes} onChange={(e) => setNotes(e.target.value)} />
           </div>
           {bookingError && <p className="form-error">{bookingError}</p>}
           <button type="submit" className="btn btn-solid" disabled={submitting}>
-            {submitting ? 'Reservando…' : 'Reservar'}
+            {submitting ? t.eventDetail.reserving : t.eventDetail.reserve}
           </button>
         </form>
       )}
 
       {bookingDone && bookingStatus === 'en_espera' && (
         <p>
-          Este evento ya alcanzó su cupo — quedaste en lista de espera. Te avisaremos si se libera un
-          lugar. Puedes ver su estado en <Link to="/dashboard/participante">tu dashboard</Link>.
+          {t.eventDetail.waitlistMessage} <Link to="/dashboard/participante">{t.eventDetail.dashboardLinkText}</Link>.
         </p>
       )}
 
       {bookingDone && bookingStatus !== 'en_espera' && (
         <p>
-          ¡Listo! Tu reserva quedó registrada. Puedes ver su estado en{' '}
-          <Link to="/dashboard/participante">tu dashboard</Link>.
+          {t.eventDetail.successMessage} <Link to="/dashboard/participante">{t.eventDetail.dashboardLinkText}</Link>.
         </p>
       )}
     </div>

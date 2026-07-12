@@ -62,6 +62,28 @@ interface SuggestedAction {
   label: string
 }
 
+type Language = 'es' | 'en'
+
+// El system prompt en sí se queda en un solo idioma (español) para no
+// duplicar todo el texto de instrucciones — se le agrega esta directiva al
+// final para que Claude responda en el idioma que eligió el usuario en el
+// selector de la UI, sin importar en qué idioma le escriban.
+function languageDirective(language: Language): string {
+  return language === 'en'
+    ? '\n\nRespond always in English, regardless of what language the user writes in.'
+    : '\n\nResponde siempre en español, sin importar en qué idioma escriba el usuario.'
+}
+
+const RATE_LIMIT_MESSAGE: Record<Language, (limit: number) => string> = {
+  es: (limit) => `Llegaste a tu límite de ${limit} mensajes por hoy. Vuelve a intentarlo mañana.`,
+  en: (limit) => `You've reached your limit of ${limit} messages for today. Please try again tomorrow.`,
+}
+
+const MAX_ITERATIONS_MESSAGE: Record<Language, string> = {
+  es: 'No pude terminar de procesar tu pregunta, ¿puedes reformularla de forma más simple?',
+  en: "I couldn't finish processing your question — could you rephrase it more simply?",
+}
+
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
@@ -85,7 +107,7 @@ Deno.serve(async (req) => {
     return json({ error: 'Sesión inválida.' }, 401)
   }
 
-  let body: { message?: string; history?: ChatMessage[]; context?: string }
+  let body: { message?: string; history?: ChatMessage[]; context?: string; language?: string }
   try {
     body = await req.json()
   } catch {
@@ -96,6 +118,8 @@ Deno.serve(async (req) => {
   if (!userMessage) {
     return json({ error: 'Falta el mensaje.' }, 400)
   }
+
+  const language: Language = body.language === 'en' ? 'en' : 'es'
 
   const { data: profile, error: profileError } = await userClient
     .from('profiles')
@@ -109,16 +133,16 @@ Deno.serve(async (req) => {
 
   const role = profile.role as 'anfitrion' | 'participante'
 
-  const limitError = await checkAndIncrementRateLimit(userClient, user.id)
+  const limitError = await checkAndIncrementRateLimit(userClient, user.id, language)
   if (limitError) {
     return json({ reply: limitError }, 200)
   }
 
   const tools = role === 'anfitrion' ? hostTools : participantTools
   const systemPrompt =
-    role === 'anfitrion'
+    (role === 'anfitrion'
       ? withContext(HOST_SYSTEM_PROMPT, body.context)
-      : withContext(PARTICIPANT_SYSTEM_PROMPT, body.context)
+      : withContext(PARTICIPANT_SYSTEM_PROMPT, body.context)) + languageDirective(language)
 
   const history = (body.history ?? []).slice(-MAX_HISTORY_TURNS)
   const messages: Anthropic.MessageParam[] = [
@@ -173,7 +197,7 @@ Deno.serve(async (req) => {
 
     // Se llegó al tope de iteraciones sin que el modelo cerrara el turno.
     return json({
-      reply: 'No pude terminar de procesar tu pregunta, ¿puedes reformularla de forma más simple?',
+      reply: MAX_ITERATIONS_MESSAGE[language],
       suggested_action: suggestedAction,
     })
   } catch (error) {
@@ -196,7 +220,11 @@ function extractText(content: Anthropic.ContentBlock[]): string {
 }
 
 // deno-lint-ignore no-explicit-any
-async function checkAndIncrementRateLimit(userClient: any, userId: string): Promise<string | null> {
+async function checkAndIncrementRateLimit(
+  userClient: any,
+  userId: string,
+  language: Language,
+): Promise<string | null> {
   const today = new Date().toISOString().slice(0, 10)
 
   const { data: existing } = await userClient
@@ -212,7 +240,7 @@ async function checkAndIncrementRateLimit(userClient: any, userId: string): Prom
   }
 
   if (existing.message_count >= DAILY_MESSAGE_LIMIT) {
-    return `Llegaste a tu límite de ${DAILY_MESSAGE_LIMIT} mensajes por hoy. Vuelve a intentarlo mañana.`
+    return RATE_LIMIT_MESSAGE[language](DAILY_MESSAGE_LIMIT)
   }
 
   await userClient
