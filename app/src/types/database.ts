@@ -14,6 +14,7 @@ export type UserRole = 'anfitrion' | 'participante'
 export type RestrictionType = 'dietetica' | 'medica' | 'accesibilidad' | 'otra'
 export type EventStatus = 'borrador' | 'publicado' | 'cancelado' | 'finalizado'
 export type BookingStatus = 'pendiente' | 'confirmado' | 'cancelado' | 'asistio' | 'no_asistio'
+export type AnchorStatus = 'pendiente' | 'confirmado' | 'fallido'
 
 export interface Database {
   public: {
@@ -180,6 +181,34 @@ export interface Database {
         Update: Partial<Database['public']['Tables']['reviews']['Insert']>
         Relationships: []
       }
+      review_anchors: {
+        Row: {
+          id: string
+          review_id: string
+          content_hash: string
+          network: string
+          tx_hash: string | null
+          status: AnchorStatus
+          block_number: number | null
+          error_message: string | null
+          requested_at: string
+          confirmed_at: string | null
+        }
+        Insert: {
+          id?: string
+          review_id: string
+          content_hash: string
+          network?: string
+          tx_hash?: string | null
+          status?: AnchorStatus
+          block_number?: number | null
+          error_message?: string | null
+          requested_at?: string
+          confirmed_at?: string | null
+        }
+        Update: Partial<Database['public']['Tables']['review_anchors']['Insert']>
+        Relationships: []
+      }
     }
     Views: Record<string, never>
     Functions: Record<string, never>
@@ -188,6 +217,7 @@ export interface Database {
       restriction_type: RestrictionType
       event_status: EventStatus
       booking_status: BookingStatus
+      anchor_status: AnchorStatus
     }
     CompositeTypes: Record<string, never>
   }
