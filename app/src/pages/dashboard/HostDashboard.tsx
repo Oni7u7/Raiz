@@ -16,6 +16,7 @@ const BOOKING_STATUSES: BookingStatus[] = [
   'cancelado',
   'asistio',
   'no_asistio',
+  'en_espera',
 ]
 
 export function HostDashboard() {
@@ -24,8 +25,9 @@ export function HostDashboard() {
 
   const [events, setEvents] = useState<EventRow[]>([])
   const [bookingsByEvent, setBookingsByEvent] = useState<Record<string, BookingRow[]>>({})
-  const [reviews, setReviews] = useState<ReviewRow[]>([])
+  const [reviewsByEvent, setReviewsByEvent] = useState<Record<string, ReviewRow[]>>({})
   const [anchorByReview, setAnchorByReview] = useState<Record<string, ReviewAnchorRow>>({})
+  const [expandedEventIds, setExpandedEventIds] = useState<Set<string>>(new Set())
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -67,7 +69,13 @@ export function HostDashboard() {
     if (reviewsRes.error) setError(reviewsRes.error.message)
     else {
       const reviewRows = reviewsRes.data ?? []
-      setReviews(reviewRows)
+
+      const grouped: Record<string, ReviewRow[]> = {}
+      for (const r of reviewRows) {
+        grouped[r.event_id] ??= []
+        grouped[r.event_id].push(r)
+      }
+      setReviewsByEvent(grouped)
 
       const reviewIds = reviewRows.map((r) => r.id)
       if (reviewIds.length) {
@@ -76,9 +84,9 @@ export function HostDashboard() {
           .select('*')
           .in('review_id', reviewIds)
 
-        const grouped: Record<string, ReviewAnchorRow> = {}
-        for (const a of anchors ?? []) grouped[a.review_id] = a
-        setAnchorByReview(grouped)
+        const groupedAnchors: Record<string, ReviewAnchorRow> = {}
+        for (const a of anchors ?? []) groupedAnchors[a.review_id] = a
+        setAnchorByReview(groupedAnchors)
       }
     }
 
@@ -97,6 +105,15 @@ export function HostDashboard() {
       return
     }
     await loadAll()
+  }
+
+  function toggleExpanded(eventId: string) {
+    setExpandedEventIds((prev) => {
+      const next = new Set(prev)
+      if (next.has(eventId)) next.delete(eventId)
+      else next.add(eventId)
+      return next
+    })
   }
 
   if (loading) return <p className="loading">Cargando…</p>
@@ -125,70 +142,87 @@ export function HostDashboard() {
           </div>
         </div>
         {events.length === 0 && <p>Aún no has publicado eventos.</p>}
-        {events.map((event) => (
-          <article key={event.id} className="host-event-card">
-            <header>
-              <h3>{event.title}</h3>
-              <span className={`status status-${event.status}`}>{event.status}</span>
-              <Link to={`/dashboard/anfitrion/eventos/${event.id}/editar`}>Editar</Link>
-            </header>
-            <p>{new Date(event.start_date).toLocaleString('es-MX')}</p>
+        {events.map((event) => {
+          const eventReviews = reviewsByEvent[event.id] ?? []
+          const isFinalizado = event.status === 'finalizado'
+          const isExpanded = !isFinalizado || expandedEventIds.has(event.id)
 
-            <h4>Reservas</h4>
-            <ul>
-              {(bookingsByEvent[event.id] ?? []).length === 0 && <li>Sin reservas.</li>}
-              {(bookingsByEvent[event.id] ?? []).map((b) => (
-                <li key={b.id}>
-                  {b.form_data && typeof b.form_data === 'object' && 'notas' in b.form_data
-                    ? String((b.form_data as { notas?: string }).notas ?? '(sin notas)')
-                    : '(sin notas)'}
-                  {' — '}
-                  <select
-                    value={b.status}
-                    onChange={(e) => updateBookingStatus(b.id, e.target.value as BookingStatus)}
-                  >
-                    {BOOKING_STATUSES.map((s) => (
-                      <option key={s} value={s}>
-                        {s}
-                      </option>
-                    ))}
-                  </select>
-                </li>
-              ))}
-            </ul>
-          </article>
-        ))}
-      </section>
+          return (
+            <article key={event.id} className="host-event-card">
+              <header>
+                <h3>{event.title}</h3>
+                <span className={`status status-${event.status}`}>{event.status}</span>
+                <Link to={`/dashboard/anfitrion/eventos/${event.id}/editar`}>Editar</Link>
+              </header>
+              <p>{new Date(event.start_date).toLocaleString('es-MX')}</p>
 
-      <section>
-        <div className="masthead">
-          <div className="mh-l">
-            <span className="kicker">Reputación</span>
-            <h2>Reviews recibidas</h2>
-          </div>
-        </div>
-        {reviews.length === 0 && <p>Todavía no tienes reviews.</p>}
-        <ul>
-          {reviews.map((r) => {
-            const anchor = anchorByReview[r.id]
-            return (
-              <li key={r.id}>
-                {'★'.repeat(r.rating)} {r.comment}
-                {anchor?.status === 'confirmado' && anchor.tx_hash && (
-                  <a
-                    href={`https://sepolia.etherscan.io/tx/${anchor.tx_hash}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title="Verificado en blockchain (Sepolia)"
-                    className="verified-badge"
-                  >
-                    ✓
-                  </a>
-                )}
-              </li>
-            )
-          })}
-        </ul>
+              {isFinalizado && (
+                <button
+                  type="button"
+                  className="btn host-event-toggle"
+                  onClick={() => toggleExpanded(event.id)}
+                >
+                  {isExpanded ? 'Ocultar ▴' : 'Ver reservas y reviews ▾'}
+                </button>
+              )}
+
+              {isExpanded && (
+                <>
+                  <div className="host-event-subsection">
+                    <h4>Reservas</h4>
+                    <ul>
+                      {(bookingsByEvent[event.id] ?? []).length === 0 && <li>Sin reservas.</li>}
+                      {(bookingsByEvent[event.id] ?? []).map((b) => (
+                        <li key={b.id}>
+                          {b.form_data && typeof b.form_data === 'object' && 'notas' in b.form_data
+                            ? String((b.form_data as { notas?: string }).notas ?? '(sin notas)')
+                            : '(sin notas)'}
+                          {' — '}
+                          <select
+                            value={b.status}
+                            onChange={(e) => updateBookingStatus(b.id, e.target.value as BookingStatus)}
+                          >
+                            {BOOKING_STATUSES.map((s) => (
+                              <option key={s} value={s}>
+                                {s}
+                              </option>
+                            ))}
+                          </select>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="host-event-subsection">
+                    <h4>Reviews</h4>
+                    <ul>
+                      {eventReviews.length === 0 && <li>Sin reviews todavía.</li>}
+                      {eventReviews.map((r) => {
+                        const anchor = anchorByReview[r.id]
+                        return (
+                          <li key={r.id}>
+                            {'★'.repeat(r.rating)} {r.comment}
+                            {anchor?.status === 'confirmado' && anchor.tx_hash && (
+                              <a
+                                href={`https://sepolia.etherscan.io/tx/${anchor.tx_hash}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="Verificado en blockchain (Sepolia)"
+                                className="verified-badge"
+                              >
+                                ✓
+                              </a>
+                            )}
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+                </>
+              )}
+            </article>
+          )
+        })}
       </section>
 
       <ChatWidget role="anfitrion" />

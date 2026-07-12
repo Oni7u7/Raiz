@@ -13,7 +13,7 @@
 export type UserRole = 'anfitrion' | 'participante'
 export type RestrictionType = 'dietetica' | 'medica' | 'accesibilidad' | 'otra'
 export type EventStatus = 'borrador' | 'publicado' | 'cancelado' | 'finalizado'
-export type BookingStatus = 'pendiente' | 'confirmado' | 'cancelado' | 'asistio' | 'no_asistio'
+export type BookingStatus = 'pendiente' | 'confirmado' | 'cancelado' | 'asistio' | 'no_asistio' | 'en_espera'
 export type AnchorStatus = 'pendiente' | 'confirmado' | 'fallido'
 
 export interface Database {
@@ -118,6 +118,8 @@ export interface Database {
           end_date: string | null
           capacity: number | null
           price: number | null
+          latitude: number | null
+          longitude: number | null
           accessibility_features: string[]
           status: EventStatus
           created_at: string
@@ -132,6 +134,8 @@ export interface Database {
           end_date?: string | null
           capacity?: number | null
           price?: number | null
+          latitude?: number | null
+          longitude?: number | null
           accessibility_features?: string[]
           status?: EventStatus
           created_at?: string

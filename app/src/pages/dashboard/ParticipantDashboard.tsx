@@ -192,6 +192,11 @@ export function ParticipantDashboard() {
                     Cancelar
                   </button>
                 )}
+                {b.status === 'en_espera' && (
+                  <p className="waitlist-note">
+                    Estás en lista de espera — te avisaremos si se libera un lugar.
+                  </p>
+                )}
                 {showReviewButton && !showReviewForm && (
                   <button type="button" className="btn" onClick={() => openReviewForm(b.id)}>
                     Dejar reseña

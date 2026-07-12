@@ -319,6 +319,39 @@ button:disabled.btn,
   margin-bottom: 0;
 }
 
+.field-checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.checkbox-option {
+  display: flex !important;
+  align-items: center;
+  gap: 0.55em;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--ink);
+  margin-bottom: 0;
+  cursor: pointer;
+}
+.checkbox-option input[type='checkbox'] {
+  width: auto;
+  accent-color: var(--accent);
+}
+.checkbox-option-detail {
+  margin-left: 1.85rem;
+  width: calc(100% - 1.85rem);
+}
+
+.event-detail-accessibility {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 /* ---- chips (verbatim) ---- */
 .chips {
   display: flex;
@@ -512,7 +545,7 @@ button:disabled.btn,
   gap: 1rem;
 }
 
-.events-list a {
+.events-list .card-link {
   display: block;
   border: 1px solid var(--rule);
   background: var(--paper-2);
@@ -521,7 +554,7 @@ button:disabled.btn,
   transition: border-color 0.2s;
 }
 
-.events-list a:hover {
+.events-list .card-link:hover {
   border-color: var(--accent);
 }
 
@@ -542,6 +575,32 @@ button:disabled.btn,
   letter-spacing: 0.1em;
   font-size: 0.66rem !important;
   color: var(--accent) !important;
+}
+
+.events-list .chips {
+  margin-top: 0.6rem;
+}
+
+/* ---- map-link: mismo lenguaje visual que los CTA externos del sitio
+   principal (ej. "Lee Détente"), pero genérico en vez de scoped a esa
+   sección ---- */
+.map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-top: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  border-bottom: 1px solid color-mix(in oklab, var(--accent), transparent 55%);
+  padding-bottom: 0.2em;
+  width: fit-content;
+}
+.map-link:hover {
+  opacity: 0.8;
 }
 
 .event-detail p {
@@ -584,7 +643,8 @@ hr {
 }
 
 .status-pendiente,
-.status-borrador {
+.status-borrador,
+.status-en_espera {
   border-color: var(--slate);
   color: var(--slate);
 }
@@ -656,6 +716,13 @@ hr {
   margin-left: auto;
 }
 
+.waitlist-note {
+  flex-basis: 100%;
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+  margin: 0.2rem 0 0;
+}
+
 .restrictions-catalog {
   padding-top: 0.4rem;
 }
@@ -673,9 +740,32 @@ hr {
 .host-event-card {
   border: 1px solid var(--rule);
   background: var(--paper-2);
+  border-radius: var(--r-lg);
+  padding: 1.4rem 1.6rem;
+  margin-bottom: 1.8rem;
+  box-shadow: var(--shadow);
+}
+
+.host-event-toggle {
+  margin: 0.8rem 0 0;
+  font-size: 0.62rem;
+  padding: 0.5em 1.1em;
+}
+
+.host-event-subsection {
+  background: var(--paper);
   border-radius: var(--r-md);
-  padding: 1.2rem 1.4rem;
-  margin-bottom: 1.2rem;
+  padding: 1rem 1.1rem;
+  margin-top: 1.1rem;
+}
+
+.host-event-subsection h4 {
+  margin: 0 0 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
 }
 
 .host-event-card header {
