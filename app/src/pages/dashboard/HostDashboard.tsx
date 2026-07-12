@@ -7,6 +7,7 @@ import type { BookingStatus, Database } from '../../types/database'
 type EventRow = Database['public']['Tables']['events']['Row']
 type BookingRow = Database['public']['Tables']['bookings']['Row']
 type ReviewRow = Database['public']['Tables']['reviews']['Row']
+type ReviewAnchorRow = Database['public']['Tables']['review_anchors']['Row']
 
 const BOOKING_STATUSES: BookingStatus[] = [
   'pendiente',
@@ -23,6 +24,7 @@ export function HostDashboard() {
   const [events, setEvents] = useState<EventRow[]>([])
   const [bookingsByEvent, setBookingsByEvent] = useState<Record<string, BookingRow[]>>({})
   const [reviews, setReviews] = useState<ReviewRow[]>([])
+  const [anchorByReview, setAnchorByReview] = useState<Record<string, ReviewAnchorRow>>({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -62,7 +64,22 @@ export function HostDashboard() {
     }
 
     if (reviewsRes.error) setError(reviewsRes.error.message)
-    else setReviews(reviewsRes.data ?? [])
+    else {
+      const reviewRows = reviewsRes.data ?? []
+      setReviews(reviewRows)
+
+      const reviewIds = reviewRows.map((r) => r.id)
+      if (reviewIds.length) {
+        const { data: anchors } = await supabase
+          .from('review_anchors')
+          .select('*')
+          .in('review_id', reviewIds)
+
+        const grouped: Record<string, ReviewAnchorRow> = {}
+        for (const a of anchors ?? []) grouped[a.review_id] = a
+        setAnchorByReview(grouped)
+      }
+    }
 
     setLoading(false)
   }
@@ -151,11 +168,25 @@ export function HostDashboard() {
         </div>
         {reviews.length === 0 && <p>Todavía no tienes reviews.</p>}
         <ul>
-          {reviews.map((r) => (
-            <li key={r.id}>
-              {'★'.repeat(r.rating)} {r.comment}
-            </li>
-          ))}
+          {reviews.map((r) => {
+            const anchor = anchorByReview[r.id]
+            return (
+              <li key={r.id}>
+                {'★'.repeat(r.rating)} {r.comment}
+                {anchor?.status === 'confirmado' && anchor.tx_hash && (
+                  <a
+                    href={`https://sepolia.etherscan.io/tx/${anchor.tx_hash}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Verificado en blockchain (Sepolia)"
+                    className="verified-badge"
+                  >
+                    ✓
+                  </a>
+                )}
+              </li>
+            )
+          })}
         </ul>
       </section>
     </div>
