@@ -13,4 +13,6 @@
 Thumbs.db
 
 # Por si algún día se instalan dependencias a nivel raíz (hoy no hay package.json aquí)
-node_modules
+node_modules 
+
+
