@@ -16,6 +16,7 @@ export function Nav() {
         Raíz<span className="dot"></span>
       </Link>
       <div className="app-nav-links">
+        <Link to="/">Inicio</Link>
         <Link to="/eventos">Eventos</Link>
         {session && profile?.role === 'participante' && (
           <Link to="/dashboard/participante">Mi dashboard</Link>

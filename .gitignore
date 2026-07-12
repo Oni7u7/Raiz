@@ -1,0 +1,16 @@
+# Secrets — nunca deben trackearse
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Vercel CLI (link local del proyecto, se genera al correr `vercel` a mano)
+.vercel
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Por si algún día se instalan dependencias a nivel raíz (hoy no hay package.json aquí)
+node_modules
